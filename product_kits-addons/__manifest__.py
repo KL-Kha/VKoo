@@ -9,6 +9,7 @@
     'depends': ['base','product','product_kits-main'],
     'data': [
         #data
+        "data/ir_access.xml",
         "data/automatic_action.xml",
 
         # security
