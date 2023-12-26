@@ -6,7 +6,7 @@
     'category': 'Sales',
     'website': 'https://simplify-erp.com',
     'license': 'LGPL-3',
-    'depends': ['base'],
+    'depends': ['base','product','product_kits-main'],
     'data': [
         #data
         "data/automatic_action.xml",
@@ -19,6 +19,11 @@
         'views/x_res_config_settings_views.xml',
 
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'product_kits-addons/static/src/js/x_website_sale.js',
+        ],
+    },
     'auto_install': False,
     'installable': True,
 }

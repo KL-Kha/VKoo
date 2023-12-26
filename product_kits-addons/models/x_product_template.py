@@ -3,8 +3,10 @@
 
 from odoo import fields, models, api
 
-
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    x_split_products = fields.Boolean('Split Products')
+    x_split_products = fields.Boolean(string='Split Products', default=False)
+
+    def test_action(self):
+        return self
