@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mjb_sale_order_so_line" model="base.automation">
+        <field name="name">VKoo - Automated - Onchange SO Line Product kits</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="active">1</field>
+        <field name="trigger">on_create_or_write</field>
+        <field name="trigger_field_ids" eval="[(4, ref('sale.field_sale_order__order_line'))]"/>
+        <field name="code">
+for record in records:
+    for line in record.order_line:
+        if line.product_template_id.x_split_products and line.product_template_id.product_line_kit_ids:
+            for product_line in line.product_template_id.product_line_kit_ids:
+                product_kit_vals = {
+                    'product_id': product_line.product_kit_template_id.id,
+                    'product_uom_qty': product_line.quantity_per_product,
+                    'order_id': record.id,
+                }
+                env['sale.order.line'].create(product_kit_vals)
+
+            # Remove the original line after creating the product_kit_template_id lines
+            line.unlink()
+        </field>
+    </record>
+</odoo>
