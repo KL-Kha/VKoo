@@ -33,42 +33,42 @@ for record in records:
         <field name="trigger_field_ids" eval="[(4, ref('poweron_product_kits_addons.field_res_company__x_anfrage_modus_mode'))]"/>
         <field name="code">
 for record in records:
-    vkoo_products_item_inherit = env.ref('poweron_product_kits_addons.vkoo_products_item_inherit')
-    vkoo_product_price_inherit = env.ref('poweron_product_kits_addons.vkoo_product_price_inherit')
-    vkoo_cart_lines_inherit = env.ref('poweron_product_kits_addons.vkoo_cart_lines_inherit')
-    vkoo_total_inherit = env.ref('poweron_product_kits_addons.vkoo_total_inherit')
-    vkoo_cart_summary_inherit = env.ref('poweron_product_kits_addons.vkoo_cart_summary_inherit')
+    poweron_products_item_inherit = env.ref('poweron_product_kits_addons.poweron_products_item_inherit')
+    poweron_product_price_inherit = env.ref('poweron_product_kits_addons.poweron_product_price_inherit')
+    poweron_cart_lines_inherit = env.ref('poweron_product_kits_addons.poweron_cart_lines_inherit')
+    poweron_total_inherit = env.ref('poweron_product_kits_addons.poweron_total_inherit')
+    poweron_cart_summary_inherit = env.ref('poweron_product_kits_addons.poweron_cart_summary_inherit')
 
     if not record.x_anfrage_modus_mode:
-        vkoo_products_item_inherit.write({
+        poweron_products_item_inherit.write({
             'active': False
         })
-        vkoo_product_price_inherit.write({
+        poweron_product_price_inherit.write({
             'active': False
         })
-        vkoo_cart_lines_inherit.write({
+        poweron_cart_lines_inherit.write({
             'active': False
         })
-        vkoo_total_inherit.write({
+        poweron_total_inherit.write({
             'active': False
         })
-        vkoo_cart_summary_inherit.write({
+        poweron_cart_summary_inherit.write({
             'active': False
         })
     elif record.x_anfrage_modus_mode:
-        vkoo_products_item_inherit.write({
+        poweron_products_item_inherit.write({
             'active': True
         })
-        vkoo_product_price_inherit.write({
+        poweron_product_price_inherit.write({
             'active': True
         })
-        vkoo_cart_lines_inherit.write({
+        poweron_cart_lines_inherit.write({
             'active': True
         })
-        vkoo_total_inherit.write({
+        poweron_total_inherit.write({
             'active': True
         })
-        vkoo_cart_summary_inherit.write({
+        poweron_cart_summary_inherit.write({
             'active': True
         })
         </field>

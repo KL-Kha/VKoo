@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="vkoo_products_item_inherit" inherit_id="website_sale.products_item" active="True" customize_show="True" name="Custom Products item Price">
+    <template id="poweron_products_item_inherit" inherit_id="website_sale.products_item" active="True" customize_show="True" name="Custom Products item Price">
         <xpath expr="//*[hasclass('product_price')]" position="replace">
            
         </xpath>
     </template>
 
-    <template id="vkoo_product_price_inherit" inherit_id="website_sale.product_price" active="True" customize_show="True" name="Custom Product Price">
+    <template id="poweron_product_price_inherit" inherit_id="website_sale.product_price" active="True" customize_show="True" name="Custom Product Price">
         <xpath expr="//*[hasclass('product_price')]" position="replace">
            
         </xpath>
     </template>
 
-    <template id="vkoo_cart_lines_inherit" inherit_id="website_sale.cart_lines" active="True" customize_show="True" name="Custom Shopping Cart Lines">
+    <template id="poweron_cart_lines_inherit" inherit_id="website_sale.cart_lines" active="True" customize_show="True" name="Custom Shopping Cart Lines">
         <xpath expr="//th[@class='text-center td-price']" position="replace">
            
         </xpath>
@@ -21,7 +21,7 @@
         </xpath>
     </template>
 
-    <template id="vkoo_total_inherit" inherit_id="website_sale.total" active="True" customize_show="True" name="Custom total">
+    <template id="poweron_total_inherit" inherit_id="website_sale.total" active="True" customize_show="True" name="Custom total">
         <xpath expr="//tr[@id='order_total_untaxed']" position="replace">
            
         </xpath>
@@ -33,12 +33,18 @@
         </xpath>
     </template>
 
-    <template id="vkoo_cart_summary_inherit" inherit_id="website_sale.cart_summary" active="True" customize_show="True" name="Custom Cart Summary">
+    <template id="poweron_cart_summary_inherit" inherit_id="website_sale.cart_summary" active="True" customize_show="True" name="Custom Cart Summary">
         <xpath expr="//th[@class='border-top-0 td-qty']" position="replace">
            
         </xpath>
         <xpath expr="//td[@class='text-center td-price']" position="replace">
            
+        </xpath>
+    </template>
+
+    <template id="poweron_search_inherit" inherit_id="website_sale.search" active="True" customize_show="True" name="Custom search input bar">
+        <xpath expr="//t[@t-set='display_detail']" position="replace">
+           <t t-set="display_detail" t-valuef="false"/>
         </xpath>
     </template>
 </odoo>
