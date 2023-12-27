@@ -17,7 +17,7 @@
                             <label for="x_anfrage_modus_mode"/>
                             <span title="Values set here are website-specific."/>
                             <div class="text-muted">
-                                Anfrage Modus / RQF Mode
+                                Anfrage Modus / RFQ Mode
                             </div>
                         </div>
                     </div>
