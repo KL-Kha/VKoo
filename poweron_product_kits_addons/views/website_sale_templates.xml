@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="vkoo_products_item_inherit" inherit_id="website_sale.products_item" active="True" customize_show="True" name="Custom Products item Price">
+        <xpath expr="//*[hasclass('product_price')]" position="replace">
+           
+        </xpath>
+    </template>
+
+    <template id="vkoo_product_price_inherit" inherit_id="website_sale.product_price" active="True" customize_show="True" name="Custom Product Price">
+        <xpath expr="//*[hasclass('product_price')]" position="replace">
+           
+        </xpath>
+    </template>
+
+    <template id="vkoo_cart_lines_inherit" inherit_id="website_sale.cart_lines" active="True" customize_show="True" name="Custom Shopping Cart Lines">
+        <xpath expr="//th[@class='text-center td-price']" position="replace">
+           
+        </xpath>
+        <xpath expr="//td[@name='price']" position="replace">
+           
+        </xpath>
+    </template>
+
+    <template id="vkoo_total_inherit" inherit_id="website_sale.total" active="True" customize_show="True" name="Custom total">
+        <xpath expr="//tr[@id='order_total_untaxed']" position="replace">
+           
+        </xpath>
+        <xpath expr="//tr[@id='order_total_taxes']" position="replace">
+           
+        </xpath>
+        <xpath expr="//tr[@id='order_total']" position="replace">
+           
+        </xpath>
+    </template>
+
+    <template id="vkoo_cart_summary_inherit" inherit_id="website_sale.cart_summary" active="True" customize_show="True" name="Custom Cart Summary">
+        <xpath expr="//th[@class='border-top-0 td-qty']" position="replace">
+           
+        </xpath>
+        <xpath expr="//td[@class='text-center td-price']" position="replace">
+           
+        </xpath>
+    </template>
+</odoo>
