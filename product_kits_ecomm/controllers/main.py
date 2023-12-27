@@ -34,8 +34,8 @@ class CustomWebsiteSale(WebsiteSale):
 
     @http.route(['/shop/cart/update_json'], type='json', auth="public", methods=['POST'], website=True, csrf=False)
     def cart_update_json(
-        self, product_id, line_id=None, add_qty=None, set_qty=None, display=True,
-        product_custom_attribute_values=None, no_variant_attribute_values=None, **kw
+            self, product_id, line_id=None, add_qty=None, set_qty=None, display=True,
+            product_custom_attribute_values=None, no_variant_attribute_values=None, **kw
     ):
         """
         This route is called :
@@ -57,7 +57,7 @@ class CustomWebsiteSale(WebsiteSale):
         if no_variant_attribute_values:
             no_variant_attribute_values = json_scriptsafe.loads(no_variant_attribute_values)
 
-        record_product_template_id = request.env['product.product'].search([('id','=',product_id)])
+        record_product_template_id = request.env['product.product'].search([('id', '=', product_id)])
 
         product_kits_check = False
         if record_product_template_id.product_tmpl_id.x_split_products:

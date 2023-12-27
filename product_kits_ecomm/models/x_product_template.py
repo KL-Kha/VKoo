@@ -9,5 +9,3 @@ class ProductTemplate(models.Model):
 
     x_split_products = fields.Boolean(string='Split Products', default=False)
 
-    def test_action(self):
-        return self
