@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="add_bundle_wizard_view" model="ir.ui.view">
+            <field name="name">add.bundle.wizard.form</field>
+            <field name="model">add.bundle.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="sale_order_id" invisible="1"/>
+                            <field name="sale_order_template_id" invisible="1"/>
+                            <field name="kit_template_id" context="{'default_type':'product_kit_template_id'}" required="True"/>
+                            <!--<field name="kit_product_discount"/>-->
+                        </group>
+                        <group>
+                            <field name="quantity_per_products" required="True"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="product_line_kit_ids" widget="one2many" string="Select Products" context="{'default_wizard_id': id}">
+                            <tree string="Pack products" create="0" editable="bottom">
+                                <field name="product_kit_template_id" readonly="1"/>
+                                <field name="available_product_kit_product_ids" invisible="1"/>
+                                <field name="product_kit_product_id" domain="[('id', 'in', available_product_kit_product_ids)]"/>
+                                <field name="quantity_per_product"/>
+                                <field name="product_uom"/>
+                                <field name="wizard_id" invisible="1"/>
+                                <!--<button string="Configure" class="btn btn-primary" type="object" name="configure"/>-->
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button string="Add Bundle Products" class="btn btn-primary" type="object" name="add_bundle"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
