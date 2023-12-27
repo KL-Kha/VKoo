@@ -47,34 +47,69 @@ class CustomWebsiteSale(WebsiteSale):
 
         record_product_template_id = request.env['product.product'].search([('id','=',product_id)])
 
+        product_kits_check = False
         if record_product_template_id.product_tmpl_id.x_split_products:
-            product_id = record_product_template_id.product_tmpl_id.product_line_kit_ids[0].product_kit_template_id.id
+            product_kits_check = True
 
-        value = order._cart_update(
-            product_id=product_id,
-            line_id=line_id,
-            add_qty=add_qty,
-            set_qty=set_qty,
-            product_custom_attribute_values=json_scriptsafe.loads(pcav) if pcav else None,
-            no_variant_attribute_values=json_scriptsafe.loads(nvav) if nvav else None
-        )
+        if product_kits_check == False:
+            value = order._cart_update(
+                product_id=product_id,
+                line_id=line_id,
+                add_qty=add_qty,
+                set_qty=set_qty,
+                product_custom_attribute_values=json_scriptsafe.loads(pcav) if pcav else None,
+                no_variant_attribute_values=json_scriptsafe.loads(nvav) if nvav else None
+            )
 
-        if not order.cart_quantity:
-            request.website.sale_reset()
+            if not order.cart_quantity:
+                request.website.sale_reset()
+                return value
+
+            order = request.website.sale_get_order()
+            value['cart_quantity'] = order.cart_quantity
+
+            if not display:
+                return value
+
+            value['website_sale.cart_lines'] = request.env['ir.ui.view']._render_template("website_sale.cart_lines", {
+                'website_sale_order': order,
+                'date': fields.Date.today(),
+                'suggested_products': order._cart_accessories()
+            })
+            value['website_sale.short_cart_summary'] = request.env['ir.ui.view']._render_template("website_sale.short_cart_summary", {
+                'website_sale_order': order,
+            })
             return value
+        elif product_kits_check == True:
+            for line_kit in record_product_template_id.product_tmpl_id.product_line_kit_ids:
+                product_id = line_kit.product_kit_template_id.id
+                add_qty = line_kit.quantity_per_product
 
-        order = request.website.sale_get_order()
-        value['cart_quantity'] = order.cart_quantity
+                value = order._cart_update(
+                    product_id=product_id,
+                    line_id=line_id,
+                    add_qty=add_qty,
+                    set_qty=set_qty,
+                    product_custom_attribute_values=json_scriptsafe.loads(pcav) if pcav else None,
+                    no_variant_attribute_values=json_scriptsafe.loads(nvav) if nvav else None
+                )
 
-        if not display:
+                if not order.cart_quantity:
+                    request.website.sale_reset()
+                    return value
+
+                order = request.website.sale_get_order()
+                value['cart_quantity'] = order.cart_quantity
+
+                if not display:
+                    return value
+
+                value['website_sale.cart_lines'] = request.env['ir.ui.view']._render_template("website_sale.cart_lines", {
+                    'website_sale_order': order,
+                    'date': fields.Date.today(),
+                    'suggested_products': order._cart_accessories()
+                })
+                value['website_sale.short_cart_summary'] = request.env['ir.ui.view']._render_template("website_sale.short_cart_summary", {
+                    'website_sale_order': order,
+                })
             return value
-
-        value['website_sale.cart_lines'] = request.env['ir.ui.view']._render_template("website_sale.cart_lines", {
-            'website_sale_order': order,
-            'date': fields.Date.today(),
-            'suggested_products': order._cart_accessories()
-        })
-        value['website_sale.short_cart_summary'] = request.env['ir.ui.view']._render_template("website_sale.short_cart_summary", {
-            'website_sale_order': order,
-        })
-        return value
