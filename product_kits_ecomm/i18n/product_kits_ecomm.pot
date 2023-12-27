@@ -25,12 +25,12 @@ msgstr ""
 
 #. module: product_kits_ecomm
 #: model:ir.model.fields,field_description:product_kits_ecomm.field_res_company__x_anfrage_modus_mode
-msgid "Anfrage Modus / RQF Mode"
+msgid "Anfrage Modus / RFQ Mode"
 msgstr ""
 
 #. module: product_kits_ecomm
 #: model:ir.model.fields,field_description:product_kits_ecomm.field_res_config_settings__x_anfrage_modus_mode
-msgid "Anfrage Modus / RQF Mode"
+msgid "Anfrage Modus / RFQ Mode"
 msgstr ""
 
 #. module: product_kits_ecomm

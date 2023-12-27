@@ -25,7 +25,7 @@ for record in records:
     </record>
 
     <record id="poweron_res_company_angrage_mode" model="base.automation">
-        <field name="name">Poweron - Automated - Onchange Anfrage Modus/RQF Mode</field>
+        <field name="name">Poweron - Automated - Onchange Anfrage Modus/RFQ Mode</field>
         <field name="model_id" ref="base.model_res_company"/>
         <field name="state">code</field>
         <field name="active">1</field>
@@ -38,7 +38,7 @@ for record in records:
     poweron_cart_lines_inherit = env.ref('product_kits_ecomm.poweron_cart_lines_inherit')
     poweron_total_inherit = env.ref('product_kits_ecomm.poweron_total_inherit')
     poweron_cart_summary_inherit = env.ref('product_kits_ecomm.poweron_cart_summary_inherit')
-
+    poweron_search_inherit = env.ref('product_kits_ecomm.poweron_search_inherit')
     if not record.x_anfrage_modus_mode:
         poweron_products_item_inherit.write({
             'active': False
@@ -55,6 +55,9 @@ for record in records:
         poweron_cart_summary_inherit.write({
             'active': False
         })
+        poweron_search_inherit.write({
+            'active': False
+        })
     elif record.x_anfrage_modus_mode:
         poweron_products_item_inherit.write({
             'active': True
@@ -69,6 +72,9 @@ for record in records:
             'active': True
         })
         poweron_cart_summary_inherit.write({
+            'active': True
+        })
+        poweron_search_inherit.write({
             'active': True
         })
         </field>
