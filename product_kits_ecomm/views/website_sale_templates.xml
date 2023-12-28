@@ -47,4 +47,44 @@
            <t t-set="display_detail" t-valuef="false"/>
         </xpath>
     </template>
+
+    <template id="poweron_configure_optional_products_inherit" inherit_id="sale_product_configurator.configure_optional_products" active="True" customize_show="True" name="Custom Optional Product">
+        <xpath expr="//th[@class='text-center td-price']" position="replace">
+
+        </xpath>
+        <xpath expr="//span[@class='oe_price product_id']" position="replace">
+            <span class="oe_price product_id mt-3" style="white-space: nowrap;display: none;"
+            t-att-data-product-id="product.id"
+            t-out="combination_info['price']"
+            t-options='{
+                "widget": "monetary",
+                "display_currency": (pricelist or product).currency_id
+            }'/>
+        </xpath>
+        <xpath expr="//tr[@class='o_total_row']" position="replace">
+            <tr class="o_total_row">
+                <td colspan="4" class="text-end" style="display: none;">
+                    <strong>Total:</strong>
+                    <span class="js_price_total fw-bold" style="white-space: nowrap;display: none;"
+                        t-att-data-product-id="product.id"
+                        t-out="combination_info['price'] * (add_qty or 1)"
+                        t-options='{
+                            "widget": "monetary",
+                            "display_currency": (pricelist or product).currency_id
+                        }'/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+    <template id="poweron_optional_product_items_inherit" inherit_id="sale_product_configurator.optional_product_items" active="True" customize_show="True" name="Custom Optional Product Items">
+        <xpath expr="//div[@class='oe_price']" position="replace">
+            <div class="oe_price" style="white-space: nowrap;display: none;"
+                t-out="combination_info['price']"
+                t-options='{
+                    "widget": "monetary",
+                    "display_currency": (pricelist or product).currency_id
+                }'/>
+        </xpath>
+    </template>
 </odoo>
