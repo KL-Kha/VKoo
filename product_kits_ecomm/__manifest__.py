@@ -6,7 +6,7 @@
     'category': 'Sales',
     'website': 'https://simplify-erp.com',
     'license': 'LGPL-3',
-    'depends': ['base','base_automation','sale','website_sale','product','product_kits'],
+    'depends': ['base','base_automation','sale','website_sale','sale_product_configurator','product','product_kits',],
     'data': [
         #data
         "data/ir_access.xml",
