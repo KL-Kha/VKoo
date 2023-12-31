@@ -1,0 +1,58 @@
+<odoo>
+    <record id="view_production_lot_form_inherit" model="ir.ui.view">
+        <field name="name">view.production.lot.tree.inherit</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="flashlist_data_id" attrs="{'invisible': [('flashlist_data_id', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//group[@name='main_group']/group[1]" position="attributes">
+                <attribute name="string">General Information</attribute>
+            </xpath>
+            <xpath expr="//group[@name='main_group']/group[2]" position="replace">
+                <group string="Technical Parameters" name="flashlist_parameters"
+                        attrs="{'invisible': [('flashlist_data_id', '=', False)]}">
+                    <field name="performance"/>
+                    <field name="pmpp"/>
+                    <field name="umpp"/>
+                    <field name="impp"/>
+                    <field name="vmpp"/>
+                    <field name="isc"/>
+                    <field name="uoc"/>
+                    <field name="voc"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_production_lot_tree_inherit" model="ir.ui.view">
+        <field name="name">view.production.lot.form.inherit</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="before">
+                <field name="pallet_number" optional="show"/>
+                <field name="article_number" optional="show"/>
+                <field name="article_description" optional="show"/>
+                <field name="manufacturer" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="performance" optional="show"/>
+                <field name="pmpp" optional="show"/>
+                <field name="umpp" optional="show"/>
+                <field name="impp" optional="show"/>
+                <field name="vmpp" optional="show"/>
+                <field name="isc" optional="show"/>
+                <field name="uoc" optional="show"/>
+                <field name="voc" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='ref']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,99 @@
+<odoo>
+    <record id="view_flashlist_data_form" model="ir.ui.view">
+        <field name="name">view.flashlist.data.tree</field>
+        <field name="model">flashlist.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Product Information">
+                            <field name="article_number"/>
+                            <field name="article_description"/>
+                            <field name="manufacturer"/>
+                            <field name="serial_number"/>
+                            <field name="pallet_number"/>
+                        </group>
+                        <group string="Technical Parameters">
+                            <field name="performance"/>
+                            <field name="pmpp"/>
+                            <field name="umpp"/>
+                            <field name="impp"/>
+                            <field name="vmpp"/>
+                            <field name="isc"/>
+                            <field name="uoc"/>
+                            <field name="voc"/>
+                        </group>
+                        <group string="Container Information">
+                            <field name="container_number"/>
+                            <field name="order_number"/>
+                        </group>
+                        <group string="Other Information">
+                            <field name="attachment_id" string="Flashlist Filename"/>
+                            <field name="create_date" string="Imported On"/>
+                            <field name="create_uid" string="Imported By"/>
+                            <field name="product_id" string="Assigned to Product"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_flashlist_data_tree" model="ir.ui.view">
+        <field name="name">view.flashlist.data.tree</field>
+        <field name="model">flashlist.data</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="product_id != False">
+                <field name="article_number"/>
+                <field name="article_description"/>
+                <field name="manufacturer"/>
+                <field name="performance"/>
+                <field name="serial_number"/>
+                <field name="pallet_number"/>
+                <field name="container_number" optional="hide"/>
+                <field name="order_number" optional="hide"/>
+                <field name="pmpp"/>
+                <field name="umpp"/>
+                <field name="impp"/>
+                <field name="vmpp"/>
+                <field name="isc"/>
+                <field name="uoc"/>
+                <field name="voc"/>
+                <field name="attachment_id" optional="hide"/>
+                <field name="product_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="flashlist_data_search_view">
+        <field name="name">Flashlist Data Search</field>
+        <field name="model">flashlist.data</field>
+        <field name="arch" type="xml">
+            <search string="Product Lots Filter">
+                <field name="serial_number" string="Serial Number" filter_domain="[('serial_number', 'ilike', self)]"/>
+                <field name="product_id"/>
+                <field name="attachment_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_product" string="Product" context="{'group_by': 'product_id'}"/>
+                    <filter name="group_by_attachment_id" string="Flashlist File" context="{'group_by': 'attachment_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_view_flashlist_data" model="ir.actions.act_window">
+        <field name="name">Flashlist Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">flashlist.data</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_flashlist_data_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('view_flashlist_data_form')})]"/>
+        <field name="search_view_id" ref="flashlist_data_search_view"/>
+    </record>
+
+    <menuitem action="action_view_flashlist_data"
+        id="menu_action_view_flashlist_data"
+        parent="stock.menu_stock_inventory_control"
+        sequence="121"/>
+</odoo>
