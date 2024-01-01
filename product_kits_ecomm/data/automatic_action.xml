@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="poweron_sale_order_so_line" model="base.automation">
+        <field name="name">PowerOn - Automated - Onchange SO Line Product kits</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="active">1</field>
+        <field name="trigger">on_create_or_write</field>
+        <field name="trigger_field_ids" eval="[(4, ref('sale.field_sale_order__order_line'))]"/>
+        <field name="code">
+for record in records:
+    for line in record.order_line:
+        if line.product_template_id.x_split_products and line.product_template_id.product_line_kit_ids:
+            for product_line in line.product_template_id.product_line_kit_ids:
+                product_kit_vals = {
+                    'product_id': product_line.product_kit_template_id.id,
+                    'product_uom_qty': product_line.quantity_per_product,
+                    'order_id': record.id,
+                }
+                env['sale.order.line'].create(product_kit_vals)
+
+            # Remove the original line after creating the product_kit_template_id lines
+            line.unlink()
+        </field>
+    </record>
+
+    <record id="poweron_res_company_angrage_mode" model="base.automation">
+        <field name="name">Poweron - Automated - Onchange Anfrage Modus/RFQ Mode</field>
+        <field name="model_id" ref="base.model_res_company"/>
+        <field name="state">code</field>
+        <field name="active">1</field>
+        <field name="trigger">on_create_or_write</field>
+        <field name="trigger_field_ids" eval="[(4, ref('product_kits_ecomm.field_res_company__x_anfrage_modus_mode'))]"/>
+        <field name="code">
+for record in records:
+    poweron_products_item_inherit = env.ref('product_kits_ecomm.poweron_products_item_inherit')
+    poweron_product_price_inherit = env.ref('product_kits_ecomm.poweron_product_price_inherit')
+    poweron_cart_lines_inherit = env.ref('product_kits_ecomm.poweron_cart_lines_inherit')
+    poweron_total_inherit = env.ref('product_kits_ecomm.poweron_total_inherit')
+    poweron_cart_summary_inherit = env.ref('product_kits_ecomm.poweron_cart_summary_inherit')
+    poweron_search_inherit = env.ref('product_kits_ecomm.poweron_search_inherit')
+    if not record.x_anfrage_modus_mode:
+        poweron_products_item_inherit.write({
+            'active': False
+        })
+        poweron_product_price_inherit.write({
+            'active': False
+        })
+        poweron_cart_lines_inherit.write({
+            'active': False
+        })
+        poweron_total_inherit.write({
+            'active': False
+        })
+        poweron_cart_summary_inherit.write({
+            'active': False
+        })
+        poweron_search_inherit.write({
+            'active': False
+        })
+    elif record.x_anfrage_modus_mode:
+        poweron_products_item_inherit.write({
+            'active': True
+        })
+        poweron_product_price_inherit.write({
+            'active': True
+        })
+        poweron_cart_lines_inherit.write({
+            'active': True
+        })
+        poweron_total_inherit.write({
+            'active': True
+        })
+        poweron_cart_summary_inherit.write({
+            'active': True
+        })
+        poweron_search_inherit.write({
+            'active': True
+        })
+        </field>
+    </record>
+</odoo>
