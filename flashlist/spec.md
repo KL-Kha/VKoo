@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-The PV Module FlashLists is an Odoo module designed to import, process, and manage FlashLists - excel files that contain manufacturer data for photovoltaic (PV) modules identified uniquely by serial numbers. The data is stored on an Odoo server and integrated into Odoo ERP models.
+The PV Module FlashLists is an Odoo module designed to import, process, and manage FlashLists - excel files that contain supplier data for photovoltaic (PV) modules identified uniquely by serial numbers. The data is stored on an Odoo server and integrated into Odoo ERP models.
 
 ## 2. General Description
 
@@ -63,7 +63,7 @@ The system should allow flash lists to be  linked to a WH-IN in the Odoo ERP sys
 
 ### 4.5 Flashlist Management 
 
-1. all FlashLists can be viewed in a list view. columns are name of file, date of upload, manufacturer, a download button. The manufacturer can be changed by user (select from contacts columns are name of file, date of upload, manufacturer, a download button. The manufacture can be changed by user. A mini module should facilitate the.).
+1. all FlashLists can be viewed in a list view. columns are name of file, date of upload, supplier, a download button. The supplier can be changed by user (select from contacts columns are name of file, date of upload, supplier, a download button. The manufacture can be changed by user. A mini module should facilitate the.).
 
 2. Flash lists can be deleted by inventory admin. All other users can upload them.
 

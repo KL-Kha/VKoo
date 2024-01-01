@@ -1,23 +1,23 @@
-### Problem
+## Problem
 
 Solar panels are often delivered in [pallettes](https://jcsolarpanels.co.za/wp-content/uploads/2020/07/340W-Solar-Panel-Pallet-JA-Solar-Products.jpg) and [containers](https://hackaday.com/wp-content/uploads/2021/03/dry-storage.jpg). During stock reciepts operation (WH/IN), it is difficult for stock manager to scan these large quantities of products one by one.
 
-### What are Flashlists?
+## What are Flashlists?
 
 The **Photovoltaic Panels FlashLists** module is designed to import, process, and manage FlashLists - Excel files that contain manufacturer data for photovoltaic (PV) panels, identified uniquely by **serial numbers**. The data is stored in Odoo models, and utilised in WH/IN and WH/OUT workflows.
 
-### Solution
+## Solution
 
 1. Flashlists are uploaded once into Odoo, and serial-numbers of all the PV-panels are available in the `flashlist.data` model.
 2. During stock reciepts (WH/IN) and stock delivery (WH/OUT) operations, these serial numbers are assigned to `stock.picking` operations.
 
-### Required Fields in Flashlist Excel-file
+## Required Fields in Flashlist Excel-file
 
 Following fields are required in the Excel imported.
 
 - `article_number`: Supplier's article number
 - `article_description`: Supplier's article description
-- `manufacturer`: Supplier's name 
+- `supplier`: Supplier's name 
 - `performance`: Performance ratio of product 
 - `serial_number`: Serial number of product lot
 - `pallet_number`: Pallet number of product
@@ -35,6 +35,10 @@ Following fields are required in the Excel imported.
 - `attachment_id`: Name of imported file
 - `product_id`: Display name of product (if not existing, it will be automatically created)
 
-### Reference
+### Mass Edit of Flashlist Fields
+
+Sometimes the Flashlist files do not carry interesting/important fields values such as vendor name, product-id (defaultcode) etc. These can be updated using the [mass_editing](https://github.com/OCA/server-ux/tree/15.0/mass_editing) module. The `mass_editing` module is shipped with `pwo/main2` by default, and is available under `Technical > Server Actions.`.
+
+## Reference
 
 [Original Specification](https://github.com/euroblaze/flashlist/blob/main/spec.md)

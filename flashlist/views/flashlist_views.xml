@@ -9,7 +9,7 @@
                         <group string="Product Information">
                             <field name="article_number"/>
                             <field name="article_description"/>
-                            <field name="manufacturer"/>
+                            <field name="supplier"/>
                             <field name="serial_number"/>
                             <field name="pallet_number"/>
                         </group>
@@ -46,7 +46,7 @@
             <tree decoration-muted="product_id != False">
                 <field name="article_number"/>
                 <field name="article_description"/>
-                <field name="manufacturer"/>
+                <field name="supplier"/>
                 <field name="performance"/>
                 <field name="serial_number"/>
                 <field name="pallet_number"/>

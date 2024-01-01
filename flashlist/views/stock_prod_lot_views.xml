@@ -35,7 +35,7 @@
                 <field name="pallet_number" optional="show"/>
                 <field name="article_number" optional="show"/>
                 <field name="article_description" optional="show"/>
-                <field name="manufacturer" optional="show"/>
+                <field name="supplier" optional="show"/>
             </xpath>
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="performance" optional="show"/>

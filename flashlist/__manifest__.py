@@ -1,10 +1,10 @@
 {
-    'name': 'Poweron Flashlist',
+    'name': 'PowerOn Flashlists',
     'version': '1.0',
     'license': 'AGPL-3',
-    'author': 'Simplify m97',
-    'company': 'SimplifyERP',
-    'website': 'https://simplify-erp.com/',
+    'author': 'Quy Ho',
+    'company': 'PowerOn',
+    'website': 'https://poweron.software/',
     'depends': ['base', 'stock'],
     'data': [
         # Security
