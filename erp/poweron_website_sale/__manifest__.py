@@ -10,11 +10,6 @@
         "data/ir_asset.xml",
         "views/website_sale_template.xml",
     ],
-    'assets': {
-        'web.assets_editor': [
-            ('replace', 'website/static/src/components/ace_editor/ace_editor.js', 'poweron_website_sale/static/src/js/ace_editor.js'),
-        ],
-    },
     
     "installable": True,
 }
