@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_stock_move_operations_inherit" model="ir.ui.view">
+        <field name="name">view.stock.move.operations.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_stock_move_operations" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='next_serial']" position="before">
+                <field name="use_flashlist"/>
+                <field name="allowed_flashlist_ids" invisible="1"/>
+                <field name="flashlist_id" options="{'no_open': True, 'no_create': True}" domain="[('id', 'in', allowed_flashlist_ids)]"
+                    attrs="{'invisible': [('use_flashlist', '=', False)], 'required': [('use_flashlist', '=', True)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='next_serial']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('use_flashlist', '=', True), ('display_assign_serial', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//label[@for='next_serial_count']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('use_flashlist', '=', True), ('display_assign_serial', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='next_serial_count']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('use_flashlist', '=', True), ('display_assign_serial', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
