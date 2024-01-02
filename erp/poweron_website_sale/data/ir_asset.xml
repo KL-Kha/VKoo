@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="website.user_custom_rules_scss" model="ir.asset">
+            <field name="path">poweron_website_sale/static/src/scss/user_custom_rules.scss</field>
+            <field name="sequence">10</field>
+        </record>
+    </data>
+</odoo>
