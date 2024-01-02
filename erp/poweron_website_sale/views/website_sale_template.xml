@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="products" inherit_id="website_sale.products">
+        <xpath expr="//div[hasclass('products_header')]" position="attributes">
+            <attribute name="t-if">
+                False
+            </attribute>
+        </xpath>
+    </template>
+
+    <template id="product" inherit_id="website_sale.product">
+        <xpath expr="//div[hasclass('row')][1]" position="attributes">
+            <attribute name="t-if">
+                False
+            </attribute>
+        </xpath>
+
+        <xpath expr="//div[@id='product_detail_main']/div[1]" position="attributes">
+            <attribute name="t-attf-class">col-lg-6 mt-lg-4 o_wsale_product_images position-relative</attribute>
+        </xpath>
+        <xpath expr="//div[@id='product_detail_main']/div[2]" position="attributes">
+            <attribute name="t-attf-class">col-lg-6 mt-lg-4 o_wsale_product_images position-relative</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('row')][1]" position="after">
+            <div>
+                <ol class="breadcrumb mb-2">
+                    <li class="breadcrumb-item o_not_editable">
+                        <a t-att-href="keep(category=0)">All Products</a>
+                    </li>
+                    <li t-if="category" class="breadcrumb-item">
+                        <a t-att-href="keep('/shop/category/%s' % slug(category), category=0)" t-field="category.name" />
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <span t-field="product.name" />
+                    </li>
+                </ol>
+            </div>
+        </xpath>
+
+    </template>
+</odoo>
