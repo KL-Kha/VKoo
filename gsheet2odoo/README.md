@@ -1,0 +1,2 @@
+- A generic package with specific client-scripts to import data from Google Spreadsheets into Odoo
+- This module doesn't need to have Odoo views. It's sufficient to run on command line (CLI).
