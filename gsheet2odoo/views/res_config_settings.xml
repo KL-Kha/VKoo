@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_inherit_sale_ggsheet" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale.ggsheet</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='quotation_order_setting_container']" position="after">
+                <h2>Google Sheet Connectors - SO</h2>
+                <div class="row mt16 o_settings_container" name="ggseet_setting_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="google_sheet_connector">
+                        <div class="o_setting_left_pane">
+                            <field name="use_google_sheet_connector"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="use_google_sheet_connector"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                Set a default value for connector
+                            </div>
+                            <div class="content-group"  attrs="{'invisible': [('use_google_sheet_connector','=',False)]}">
+                                <div class="mt16">
+                                    <span class="col-lg-3">Spreadsheet Url: <field name="spreadsheet_url" attrs="{'required': [('use_google_sheet_connector', '=', True)]}"/></span>
+                                </div>
+                                <div class="mt16">
+                                    <span class="col-lg-3">Credentials Path: <field name="credentials_path" attrs="{'required': [('use_google_sheet_connector', '=', True)]}"/></span>
+                                </div>
+                                <div>
+                                    <button type="object" string="Start Connection GoogleSheet To SO" class="oe_highlight" name="generate_ggsheet2odoo" groups="base.group_system"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

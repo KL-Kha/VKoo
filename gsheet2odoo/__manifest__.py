@@ -6,9 +6,9 @@
     'depends': ['base', 'sale'],
     'data': [
         'security/ir.model.access.csv',
+        'views/res_config_settings.xml',
     ],
     # 'external_dependencies': {
-    #     'python': ['gspread', 'oauth2client'],
+    #     'python': ['pandas','gspread', 'oauth2client'],
     # },
-    # other necessary metadata...
 }
