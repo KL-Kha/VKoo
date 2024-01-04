@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='integration']" position="after">
+                <h2>DokuScan</h2>
+                <div class="row mt16 o_settings_container">
+                    <!-- 19% tax -->
+                    <div class="col-12 col-lg-6 o_setting_box"
+                        id="dokuscan_tax_setting"
+                        title="If this checkbox is ticked, set SOL lines to 19% if mentioned in Totals on original document.">
+                        <div class="o_setting_left_pane">
+                            <field name="is_dokuscan_overall_tax"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="is_dokuscan_overall_tax"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                Set SOL lines to 19% if mentioned in Totals on original document
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Default OCR Product for Purchase -->
+                    <div class="col-12 col-lg-6 o_setting_box"
+                        id="dokuscan_purchase_setting"
+                        title="Default Product will be used in order lines when scanned">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="ocr_purchase_product_id"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                Set default product for Purchase Order Line when AI doesn't succeed to scan the product from document
+                            </div>
+                            <field name="ocr_purchase_product_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container">
+                    <!-- Default OCR Vendor -->
+                    <div class="col-12 col-lg-6 o_setting_box"
+                        id="dokuscan_vendor_setting"
+                        title="Default vendor will be applied when AI doesn't succeed to scan the vendor from document">
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <label for="ocr_purchase_vendor_id"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                Set default vendor for Doku Scan when AI doesn't succeed to scan the vendor from document
+                            </div>
+                            <field name="ocr_purchase_vendor_id"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
