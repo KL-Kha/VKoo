@@ -25,44 +25,57 @@ class GoogleSheetsIntegration(models.Model):
             return parse_qs(parsed_url.query)['key'][0]
         else:
             raise ValidationError(_("Invalid Google Sheets URL"))
+        
+    def create_new_product(self,default_code,name):
+        product_vals = {
+            'default_code': default_code,
+            'name': name,
+        }
+        new_product = self.env['product.product'].create(product_vals)
+        return new_product
+    
+    def create_new_customer(self,ref_id_sheet,customer_id_sheet):
+        customer_vals = {
+            'ref': ref_id_sheet,
+            'name': customer_id_sheet,
+            'company_id': self.env.user.company_id.id,
+        }
+        new_customer = self.env['res.partner'].create(customer_vals)
+        return new_customer
 
     def find_or_create_product(self, product_data):
         if product_data['default_code'] and product_data['name']:
             # Search for existing product with the given reference or name
-            existing_product = self.env['product.product'].search([
-                '|', ('default_code', '=', product_data['default_code']), ('name', '=', product_data['name'])
-            ], limit=1)
-
-            if not existing_product:
-                product_vals = {
-                    'default_code': product_data['default_code'],
-                    'name': product_data['name'],
-                }
-                new_product = self.env['product.product'].create(product_vals)
-                return new_product
+            int_product_data = int(product_data['default_code'])
+            existing_products = self.env['product.product'].search([('default_code', 'ilike', product_data['default_code'])])            
+            
+            matching_products = [product for product in existing_products if int(product.default_code) == int_product_data]
+            
+            if matching_products:
+                return matching_products[0]
             else:
-                return existing_product
+                return self.create_new_product(product_data['default_code'], product_data['name'])
         else:
             return False
 
     def create_sale_order(self, ref_id_sheet, customer_id_sheet):
-        existing_customer = self.env['res.partner'].search([('ref', '=', ref_id_sheet)])
 
-        if not existing_customer:
-            customer_vals = {
-                'ref': ref_id_sheet,
-                'name': customer_id_sheet,
-                'company_id': self.env.user.company_id.id,
-            }
-            new_customer = self.env['res.partner'].create(customer_vals)
+        int_ref_id_sheet = int(ref_id_sheet)
+        existing_customers = self.env['res.partner'].search([('ref', 'ilike', ref_id_sheet)])
 
+        matching_customers = [customer for customer in existing_customers if int(customer.ref) == int_ref_id_sheet]
+
+        if matching_customers:
             sale_order_vals = {
-                'partner_id': new_customer.id,
+                'partner_id': matching_customers[0].id,
             }
             new_sale_order = self.env['sale.order'].create(sale_order_vals)
+
+            return matching_customers[0]
         else:
+            new_customer = self.create_new_customer(ref_id_sheet, customer_id_sheet)
             sale_order_vals = {
-                'partner_id': existing_customer.id,
+                'partner_id': new_customer.id,
             }
             new_sale_order = self.env['sale.order'].create(sale_order_vals)
 
