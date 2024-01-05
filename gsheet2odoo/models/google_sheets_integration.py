@@ -64,13 +64,16 @@ class GoogleSheetsIntegration(models.Model):
         existing_customers = self.env['res.partner'].search(['|',('ref', 'ilike', ref_id_sheet),('name', 'ilike', customer_id_sheet)])
 
         if existing_customers:
-            matching_customers = [customer for customer in existing_customers if int(customer.ref) == int_ref_id_sheet]
-            sale_order_vals = {
-                'partner_id': matching_customers[0].id,
-            }
+            if int_ref_id_sheet:
+                matching_customers = [customer for customer in existing_customers if int(customer.ref) == int_ref_id_sheet]
+                sale_order_vals = {
+                    'partner_id': matching_customers[0].id,
+                }
+            else:
+                sale_order_vals = {
+                    'partner_id': existing_customers[0].id,
+                }
             new_sale_order = self.env['sale.order'].create(sale_order_vals)
-
-            return matching_customers[0]
         else:
             new_customer = self.create_new_customer(ref_id_sheet, customer_id_sheet)
             sale_order_vals = {
