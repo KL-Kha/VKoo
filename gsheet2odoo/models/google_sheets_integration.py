@@ -60,12 +60,11 @@ class GoogleSheetsIntegration(models.Model):
 
     def create_sale_order(self, ref_id_sheet, customer_id_sheet):
 
-        int_ref_id_sheet = int(ref_id_sheet)
-        existing_customers = self.env['res.partner'].search([('ref', 'ilike', ref_id_sheet)])
+        int_ref_id_sheet = int(ref_id_sheet) if ref_id_sheet else False
+        existing_customers = self.env['res.partner'].search(['|',('ref', 'ilike', ref_id_sheet),('name', 'ilike', customer_id_sheet)])
 
-        matching_customers = [customer for customer in existing_customers if int(customer.ref) == int_ref_id_sheet]
-
-        if matching_customers:
+        if existing_customers:
+            matching_customers = [customer for customer in existing_customers if int(customer.ref) == int_ref_id_sheet]
             sale_order_vals = {
                 'partner_id': matching_customers[0].id,
             }
@@ -81,21 +80,40 @@ class GoogleSheetsIntegration(models.Model):
 
         self.env.cr.commit()
         return new_sale_order
+    
+    def extract_ids_from_sheet_url(self,sheet_url):
+        pattern = re.compile(r'/spreadsheets/d/([a-zA-Z0-9-_]+).*#gid=(\d+)')
 
+        match = pattern.search(sheet_url)
+
+        if match:
+            spreadsheet_id = match.group(1)
+            sheet_id = match.group(2)
+            return spreadsheet_id, sheet_id
+        else:
+            return None, None
+        
+    def get_worksheet_value(self,sheet_list,sheet_id):
+        for i in range(len(sheet_list)):
+            if sheet_list[i].id == int(sheet_id):
+                return sheet_list[i]
     @api.model
     def get_google_sheet_data(self):
         scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-        # credentials_path = '/opt/odoo/customize/gsheet2odoo/data/test_credentials.json'
+        credentials_path = '/opt/odoo/customize/gsheet2odoo/data/test_credentials.json'
         credentials_path = self.env.user.company_id.credentials_path
 
         credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_path, scope)
         gc = gspread.authorize(credentials)
 
-        # spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1UiHYxmQqCWkuKxbIZusjuZ-b8TFAO6b_jMy-U2j--v4/edit#gid=1335899468'
+        spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1UiHYxmQqCWkuKxbIZusjuZ-b8TFAO6b_jMy-U2j--v4/edit#gid=1335899468'
         spreadsheet_url = self.env.user.company_id.spreadsheet_url
-        spreadsheet_id = self.get_spreadsheet_id(spreadsheet_url)
-        worksheet = gc.open_by_key(spreadsheet_id).sheet1
+        # spreadsheet_id = self.get_spreadsheet_id(spreadsheet_url)
+        spreadsheet_id, sheet_id = self.extract_ids_from_sheet_url(spreadsheet_url)
 
+        spreadsheet = gc.open_by_key(spreadsheet_id)
+        sheet_list = spreadsheet.worksheets()
+        worksheet = self.get_worksheet_value(sheet_list,sheet_id)
         worksheet_value = worksheet.get_all_values()
         worksheet_value_correct = worksheet_value[4:]
 
