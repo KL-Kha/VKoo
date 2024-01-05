@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "simplify-erp-com",
+  "private_key_id": "e319076613d77fbe36590073359464e304ebb6f9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCY8cutu9z8+z5L\nNFMJp2SW+TbT4E7xtbggc1QluxbQbwx+DExVfnAjywNDLzT/CDuwayR22+vUxzAK\nAAc19xDwxcv/Q8bMKsCV2J2Aq63qwodeESVsg3mSspHCSivq9LOH0bsrv+0Gmigi\nSmfsH5inchqTlG+c5Eb35yfXxnE+MZk6rA2VnXTdBfw8aKLEbuGtz+ubMTJO2Dw+\nbePO/dwMeTRg8e2MM0ZMGNnHai63xVkQoEI8es7sSLktwrmOAOUpG92dldlroPZD\nN7aicEoRw/Oq9jfuL2HRdtTx2cIsm7WfM13LLDWH3MCV3ZNSuhiBIns9dC16iESQ\nozYU/P2VAgMBAAECggEACAlZ4397RYvKIoIrBCyDO5pNcuVWy0VPhIeq2e9dFodk\nnPxLx95EnuIxrLET/tFRmZviUaCNYXk0oVc5CcaOtv1zElm0Xia3nJLCS/A5dkbR\n0sk3Md7YCjOkjGoAqXBBksHG164BEsISQ82sbPAywZxcSyRB7SONmxnOsnw0l8jx\n8GnwNIqRUcG4h3k6xRNkE8q8sFWnNOAtvgsCJU7CuN/H3gHVIicLSA3GJjIG5LVA\nxAGEyu63g4j5U601nYBAJvCIJn8jHb2DD/K822Y7gS5Q+I/mbjrHX9kOUBW+uv80\nKDpszIRieywvApPIH2MLFRAgfvcPJTLNtuqSOuqDbQKBgQDKXjz9pRu/zSRWqi4L\n9VgJ+0u0qQr8XpWDf9bwH7asKSPLJFK3TeFGDa4htdd5RWWkj1mkK93kJEVlgDTv\nX9uRBFIFzWceuYLKh4NFVhgyEnXRuNgLnELBmmu6h4kPIcEBK6uxqThuhRTP6qbz\nYcfj1jxmNwsRGzntomGJeAWQxwKBgQDBemOqxwrMpy8P9g9ONMxeMDz2NzwTZ95q\nq/Lx+eWgdwiJ4zbHh0iaGCDC00nTJxT7zU3LNHTKTRGo6+8ta4kLJzDYjfMWnPVy\nkbfNZP5MhkTtkgGzof89eHRuHGc86Vtf+Dtl74+xI3DgCNjOV1lBORgriwP57xtf\nv5MwWxiawwKBgE/oQkENrxVfVZf6/s+uAyN93PjrPvFED9mq4x5SB3mXjRCruRW0\nZN2ajUW2Xez+4BHIoObYg3eQcu6PX1eeDD8I67Jq1usk6WY7eDQquMcczvUO/hAn\nlZyI8zzmQ9J7y5BAxD0UyrmpRvyKdX3pAFsQvyzFU1Nf4tHYqpbzk48FAoGAE9R0\ndKNz4ufbtfoVNYHJ1HmDNgURPjfuHubCvrRLKbgpguBr0+V0tn50lSNMtLyTtP8k\n0wfsVHOztKmB2RjlceQxaHCcEpxBt91hhkasnbFBTUwiqoOXAnjfDg4RMrgEKoDp\nrZfxFUm5nuypM/TV7A5rAMN9w9cS6ixbbKBZlDsCgYEAnfzIHb2Y5lIQ5xGBa0mz\n414gP2dI4KwfGuY2cyxZtfoQuZiHdBZZnUlmZ804MNeCuLQkbTLUGXN3C8RBi/Pa\n+fD3z2UkkARXoQhJrbEqLlkdHBcoPoyNgopRmvG91QoHosPLzQ66tHtabF6flh6S\nfOeGL/tzRRLnnBQ/VdFF4vs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "docu-scan@simplify-erp-com.iam.gserviceaccount.com",
+  "client_id": "117849359341628021920",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/docu-scan%40simplify-erp-com.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
