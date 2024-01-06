@@ -1,0 +1,634 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* quotation_print_options
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0-20221226\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-06 05:25+0000\n"
+"PO-Revision-Date: 2023-09-06 05:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid ""
+"<span style=\"font-weight: bold !important; font-"
+"size:14px;\">AUFTRAGSBESTÄTIGUNG</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid ""
+"<span>\n"
+"                                        <strong>Optionale Positionen, Preis nicht in der Gesamtsumme enthalten\n"
+"                                        </strong>\n"
+"                                    </span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid ""
+"<span>\n"
+"                                        <strong>Optionale Positionen, Preis nicht in der Gesamtsumme enthalten</strong>\n"
+"                                    </span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>,</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>Angebotsdatum:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>Auftragsdatum:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<span>Belegnummer:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>Berater:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<span>Datum:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>E-Mail:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<span>Ihr Ansprechpartner:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>Kundennr:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<span>Kundennummer:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>Kundenreferenz:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<span>Mail:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "<span>Rabatt.%</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<span>Tel.:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "<span>gültig bis:</span>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<strong class=\"mr16\">Netto</strong>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<strong>Gesamtbrutto</strong>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<strong>Netto</strong>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "<strong>Rabatte</strong>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<strong>Shipping Address:</strong>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "<strong>Unterschrift</strong>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "AUFTRAGSERTEILUNG:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__print_all_single_prices
+msgid "Alle Einzelpreise anzeigen"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Angebot der"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Anlagenanschrift:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "BIC:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "Beschreibung"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid ""
+"Bitte prüfen Sie die folgenden Positionen auf Vollständigkeit und "
+"Richtigkeit."
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields.selection,name:quotation_print_options.selection__sale_order__logo_position__center
+msgid "Center"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__confirmation_letter
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_confirmation_letter_form
+msgid "Confirmation Letter"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__create_uid
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__create_uid
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__create_date
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__create_date
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid ""
+"Datum: ____________________________      Unterschrift: "
+"___________________________________________"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__discount_total
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_line__discount_amount
+msgid "Discount Amount"
+msgstr "Rabattbetrag"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__display_name
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__display_name
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Druckoptionen"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Einzelpreis"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Gesamtpreis"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "Geschäftsführer:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__hide_zero_price
+msgid "Hide 0 Prices"
+msgstr "0 Preise ausblenden"
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Hiermit nehme ich"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Hiermit nehme ich,"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Hiermit nehmen wir, die Firma"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid "IBAN:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__id
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__id
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__id
+msgid "ID"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__teaser_pic
+msgid "Image"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Invoice Plan"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "Invoicing Address:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid ""
+"Invoicing and Shipping\n"
+"                        Address:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__l10n_de_template_data_inherit
+msgid "L10N De Template Data Inherit"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter____last_update
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext____last_update
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__write_uid
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__write_uid
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__write_date
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__write_date
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields.selection,name:quotation_print_options.selection__sale_order__logo_position__left
+msgid "Left"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__print_logo
+msgid "Logo"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__logo_position
+msgid "Logo Position"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Logos and Pictures"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "Menge"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__name
+msgid "Name"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Optional Products"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Order Confirmation"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid ""
+"Ort, Datum: ____________________________      Unterschrift: "
+"___________________________________________"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__page_break_after_optional_product
+msgid "Page break after optional product"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_confirm
+msgid "Pos."
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__terms_and_conditions
+msgid "Post Text"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__terms_and_conditions_preview
+msgid "Post Text Preview"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__terms_and_conditions_id
+msgid "Post-text 1"
+msgstr "Nachtext 1"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__confirmation_letter_id
+msgid "Post-text 2"
+msgstr "Nachtext 2"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__pretext
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__pretext
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_pretext_form
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Pre Text"
+msgstr "Vortext"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__pretext_preview
+msgid "Pre Text Preview"
+msgstr "Vortext Vorschau"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__pretext_id
+msgid "Pre-Text"
+msgstr "Vortext"
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Price Visibility"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.ui.menu,name:quotation_print_options.menu_print_options
+msgid "Print Options"
+msgstr "Druck Optionen"
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Product Image"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.actions.act_window,name:quotation_print_options.action_sale_order_confirmation_letter
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_confirmation_letter_form
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_confirmation_letter_tree
+msgid "Quotation / Order Confirmation Letter"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.actions.act_window,name:quotation_print_options.sale_order_template_terms_and_conditions_action
+#: model:ir.model,name:quotation_print_options.model_sale_order_template_terms_and_conditions
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_terms_and_conditions_form
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_terms_and_conditions_tree
+msgid "Quotation / Order Template Post Text"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_pretext_form
+msgid "Quotation / Order Template Pre Text"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.actions.act_window,name:quotation_print_options.sale_order_template_pretext_action
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_pretext_tree
+msgid "Quotation / Order Template Pre Texts"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model,name:quotation_print_options.model_sale_order_template_pretext
+msgid "Quotation / Order Template Pretext"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.ui.menu,name:quotation_print_options.sale_order_template_terms_and_conditions_menu
+msgid "Quotation Post-text 1"
+msgstr "Angebot Nachtext 1"
+
+#. module: quotation_print_options
+#: model:ir.ui.menu,name:quotation_print_options.sale_order_template_confirmation_letter
+msgid "Quotation Post-text 2"
+msgstr "Angebot Nachtext 2"
+
+#. module: quotation_print_options
+#: model:ir.ui.menu,name:quotation_print_options.sale_order_template_pretext_menu
+msgid "Quotation Pre-text"
+msgstr "Angebot Vortext"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_invoice_plan
+msgid "Rechnungsplan anzeigen"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields.selection,name:quotation_print_options.selection__sale_order__logo_position__right
+msgid "Right"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model,name:quotation_print_options.model_sale_order_confirmation_letter
+msgid "Sale Order Confirmation Letter"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model,name:quotation_print_options.model_sale_order
+msgid "Sales Order"
+msgstr "Verkaufsauftrag "
+
+#. module: quotation_print_options
+#: model:ir.model,name:quotation_print_options.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Kundenauftragszeile"
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.view_order_form_print_options
+msgid "Sections"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.poweron_footer
+msgid ""
+"Seite:\n"
+"                        <span class=\"page\"/>\n"
+"                        von\n"
+"                        <span class=\"topage\"/>"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__page_break_before_post_text_2
+msgid "Seitennumbruch vor Nachtext 2"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__page_break_after_pre_text
+msgid "Seitenumbruch nach Vortext"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__page_break_before_post_text
+msgid "Seitenumbruch vor Nachtext 1"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__page_break_before_invoice_plan
+msgid "Seitenumbruch vor Zahlungsplan"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_partner_shipping
+msgid "Show Installation Address"
+msgstr "zeige Anlageadresse an"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_optional_product
+msgid "Show Optional Product"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_optional_product_price
+msgid "Show Optional Product Price"
+msgstr "Zeige optionale Produkte an"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_order_confirmation
+msgid "Show Order Confirmation block"
+msgstr "Auftragserteilung Block anzeigen"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_product_image
+msgid "Show Product Image"
+msgstr "Zeige Bildchen in Angebotspositionen (Beta)"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_section_price
+msgid "Show Section Price"
+msgstr "zeige Preise auf Abschnitt"
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_section_product
+msgid "Show Section Product"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__show_teaser_pic
+msgid "Show teaser picture"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "Teaser Picture"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_confirmation_letter__template
+msgid "Template"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_pretext__name
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order_template_terms_and_conditions__name
+msgid "Template Name"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.sale_order_template_terms_and_conditions_form
+msgid "Terms And Conditions"
+msgstr ""
+
+#. module: quotation_print_options
+#: model:ir.model.fields,field_description:quotation_print_options.field_sale_order__terms_and_conditions
+msgid "Terms and Conditions"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "an und erteile den Auftrag."
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "das"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "mit der Nr.:"
+msgstr ""
+
+#. module: quotation_print_options
+#: model_terms:ir.ui.view,arch_db:quotation_print_options.report_saleorder_document
+msgid "vom"
+msgstr ""

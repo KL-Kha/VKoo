@@ -1,0 +1,276 @@
+<odoo>
+
+    <template id="sale_order_confirm">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+            <t t-set="forced_vat"
+               t-value="doc.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
+            <t t-set="address">
+                <div t-field="doc.partner_id"
+                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                <p t-if="doc.partner_id.vat"><t
+                        t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:
+                    <span t-field="doc.partner_id.vat"/>
+                </p>
+            </t>
+            <t t-if="doc.partner_shipping_id == doc.partner_invoice_id
+                             and doc.partner_invoice_id != doc.partner_id
+                             or doc.partner_shipping_id != doc.partner_invoice_id">
+                <t t-set="information_block">
+                    <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Invoicing and Shipping
+                        Address:
+                    </strong>
+                    <strong t-if="doc.partner_shipping_id != doc.partner_invoice_id">Invoicing Address:</strong>
+                    <div t-field="doc.partner_invoice_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    <t t-if="doc.partner_shipping_id != doc.partner_invoice_id">
+                        <strong>Shipping Address:</strong>
+                        <div t-field="doc.partner_shipping_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </t>
+                </t>
+            </t>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div>
+                    <span style="font-size:12px; font-weight: normal !important;"
+                          t-esc="doc.company_id.company_details"/>
+                    <div class="row">
+                        <div class="col-4" style="font-size:14px; margin-left: 12px; font-weight: bold !important;">
+                            <span t-field="doc.partner_id.name"/>
+                            <t t-if="doc.partner_id.street">
+                                <span style="font-weight: bold !important;" t-field="doc.partner_id.street"/>
+                            </t>
+                            <t t-if="doc.partner_id.street2">
+                                <span style="font-weight: bold !important;" t-field="doc.partner_id.street2"/>
+                            </t>
+                            <t t-if="doc.partner_id.zip or doc.partner_id.city">
+                                <t t-if="doc.partner_id.zip"><span style="font-weight: bold !important;"
+                                                                   t-field="doc.partner_id.zip"/>&#160;
+                                </t>
+                                <t t-if="doc.partner_id.city">
+                                    <span style="font-weight: bold !important;" t-field="doc.partner_id.city"/>
+                                </t>
+                                
+                            </t>
+                        </div>
+                        <div class="col-6 pull-right" style="font-size:11px; margin-left: 110px;">
+                            <span style="font-weight: bold !important; font-size:14px;">AUFTRAGSBESTÄTIGUNG</span>
+                            <div>
+                                <span>Belegnummer:</span>
+                                <span class="pull-right" t-field="doc.name"/>
+                            </div>
+                            <div>
+                                <span>Kundennummer:</span>
+                                <span class="pull-right" t-field="doc.partner_id.ref"/>
+                            </div>
+                            <div>
+                                <span>Datum:</span>
+                                <span class="pull-right" t-field="doc.date_order"
+                                      t-options='{"format": "dd.MM.yyyy"}'/>
+                            </div>
+                            <div>
+                                <span>Ihr Ansprechpartner:</span>
+                                <span class="pull-right" t-field="doc.user_id.name"/>
+                            </div>
+                            <div>
+                                <span>Tel.:</span>
+                                <span class="pull-right"
+                                      t-esc="doc.user_id.partner_id.phone or doc.user_id.partner_id.mobile"/>
+                            </div>
+                            <div>
+                                <span>Mail:</span>
+                                <span class="pull-right" t-esc="doc.user_id.partner_id.email"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span t-field="doc.pretext" class="font-weight-bold" style="font-size: 14px;"/>
+                </div>
+                <style>
+                    .o_main_table th {
+                    border-color: black;
+                    }
+                    .o_main_table td {
+                    padding-top: 1.5rem !important;
+                    padding-bottom: 1.5rem !important;
+                    border-color: black;
+                    }
+                    .o_main_table tr:last-child td {
+                    border-bottom: 1px solid black;
+                    }
+                </style>
+                
+                <div class="font-weight-bold">
+                    <p style="font-size: 14px;">
+                        Bitte prüfen Sie die folgenden Positionen auf Vollständigkeit und Richtigkeit.
+                    </p>
+                </div>
+                <t t-set="display_discount" t-value="any(l.discount for l in doc.order_line)"/>
+                <table class="table table-sm o_main_table">
+                    <thead style="font-size:14px; font-weight: bold !important;">
+                        <tr>
+                            <th name="th_num" class="text-left">Pos.</th>
+                            <th name="th_description" class="text-left">Beschreibung</th>
+                            <th name="th_quantity" class="text-center">Menge</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody" style="font-size:12px;">
+                        <t t-set="current_subtotal" t-value="0"/>
+                        <t t-set="num" t-value="0"/>
+                        <t t-foreach="doc.order_line" t-as="line">
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+                            <t t-set="num" t-value="num + 1"/>
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                <t t-if="not line.display_type">
+                                    <td name="td_num" class="text-center">
+                                        <span t-esc="num"/>
+                                    </td>
+                                    <td name="td_name">
+                                        <b>
+                                            <span t-field="line.product_id.name"/>
+                                        </b>
+                                        <span t-field="line.product_id.description_sale"/>
+                                    </td>
+                                    <td name="td_quantity" class="text-center" colspan="2">
+                                        <span t-field="line.product_uom_qty"/>
+                                        <span t-field="line.product_uom"/>
+                                    </td>
+                                </t>
+                                <t t-if="line.display_type == 'line_section'">
+                                    <td name="td_section_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <t t-set="current_section" t-value="line"/>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                </t>
+                                <t t-if="line.display_type == 'line_note'">
+                                    <td name="td_note_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <t t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section')">
+                                <tr class="is-subtotal text-right">
+                                    <td name="td_section_subtotal" colspan="99">
+                                        <strong class="mr16">Netto</strong>
+                                        <span t-esc="current_subtotal"
+                                              t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <t t-if="doc.sale_order_option_ids">
+                            <tr>
+                                <td name="td_optional_products" colspan="99">
+                                    <span>
+                                        <strong>Optionale Positionen, Preis nicht in der Gesamtsumme enthalten
+                                        </strong>
+                                    </span>
+                                </td>
+                            </tr>
+                            <t t-foreach="doc.sale_order_option_ids" t-as="line">
+                                <t t-set="num" t-value="num + 1"/>
+                                <tr>
+                                    <td name="td_num" class="text-center">
+                                        <span t-esc="num"/>
+                                    </td>
+                                    <td name="td_name">
+                                        <b>
+                                            <span t-field="line.product_id.name"/>
+                                        </b>
+                                        <span t-field="line.product_id.description_sale"/>
+                                    </td>
+                                    <td name="td_quantity" class="text-center" colspan="2">
+                                        <span t-field="line.quantity"/>
+                                        <span t-field="line.product_id.uom_id"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+                <div class="clearfix" name="so_total_summary">
+                    <div id="total" class="row" name="total" style="font-size:14px;">
+                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                            <table class="table table-sm">
+                                <tr class="border-black o_subtotal" style="">
+                                    <td name="td_amount_untaxed_label">
+                                        <strong>Netto</strong>
+                                    </td>
+                                    <td name="td_amount_untaxed" class="text-right">
+                                        <span t-field="doc.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <t t-set="tax_totals" t-value="json.loads(doc.tax_totals_json)"/>
+                                <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                    <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                    <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]"
+                                       t-as="amount_by_group">
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <span class="text-nowrap"
+                                                          t-esc="amount_by_group['tax_group_name']"/>
+                                                </strong>
+                                            </td>
+                                            <td class="text-right o_price_total">
+                                                <span class="text-nowrap"
+                                                      t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <tr class="border-black o_total">
+                                    <td name="td_amount_total_label">
+                                        <strong>Gesamtbrutto</strong>
+                                    </td>
+                                    <td name="td_amount_total" class="text-right">
+                                        <span t-field="doc.amount_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span t-field="doc.confirmation_letter" style="font-size: 14px;"/>
+                </div>
+                <div t-if="doc.signature" class="ml64 mr4" name="signature">
+                    <div class="offset-8">
+                        <strong>Unterschrift</strong>
+                    </div>
+                    <div class="offset-8">
+                        <img t-att-src="image_data_uri(doc.signature)" style="max-height: 4cm; max-width: 8cm;"/>
+                    </div>
+                    <div class="offset-8 text-center">
+                        <p t-field="doc.signed_by"/>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_sale_order_confirm">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="quotation_print_options.sale_order_confirm" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <!--        <record id="sale_order_confirmation_report" model="ir.actions.report">-->
+    <!--            <field name="name">Order Confirmation</field>-->
+    <!--            <field name="model">sale.order</field>-->
+    <!--            <field name="report_type">qweb-pdf</field>-->
+    <!--            <field name="report_name">quotation_print_options.report_sale_order_confirm</field>-->
+    <!--            <field name="report_file">quotation_print_options.report_sale_order_confirm</field>-->
+    <!--            <field name="print_report_name">'Order Confirmation %s' % (object.name)</field>-->
+    <!--            <field name="binding_model_id" ref="model_sale_order"/>-->
+    <!--            <field name="binding_type">report</field>-->
+    <!--        </record>-->
+
+</odoo>

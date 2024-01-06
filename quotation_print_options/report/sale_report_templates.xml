@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+            <xpath expr="." position="inside">
+                <style>* {font-family:Arial;}</style>
+			</xpath>
+            <xpath expr="//table[1]" position="before">
+                <t t-if="doc.page_break_after_pre_text">
+                    <div style="page-break-after: always;">
+                        <t t-if="doc.pretext">
+                            <t t-if="doc.teaser_pic and doc.show_teaser_pic">
+                                <table style="width:100% !important;">
+                                    <tr>
+                                        <td style="width:65%;"><span t-field="doc.pretext"/></td>
+                                        <td style="width:35%; vertical-align: top;"><img t-att-src="image_data_uri(doc.teaser_pic)" alt="Teaser Picture" style="width: 100%;"/></td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <span t-field="doc.pretext"/>
+                            </t>
+                        </t>
+                    </div>
+                </t>
+                <t t-else=" ">
+                    <div>
+                        <t t-if="doc.pretext">
+                            <t t-if="doc.teaser_pic and doc.show_teaser_pic">
+                                <table style="width:100% !important;">
+                                    <tr>
+                                        <td style="width:65%;"><span t-field="doc.pretext"/></td>
+                                        <td style="width:35%; vertical-align:top;"><img t-att-src="image_data_uri(doc.teaser_pic)" alt="Teaser Picture" style="width: 100%;"/></td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <span t-field="doc.pretext"/>
+                            </t>
+                        </t>
+                    </div>
+                </t>
+            </xpath>
+            <xpath expr="//table[1]/thead" position="replace">
+                <t t-set="has_option_discount" t-value="any(option.discount != 0.0 for option in doc.sale_order_option_ids)"/>
+                <t t-set="section_dict" t-value="doc.get_subtotal_group_by_section()"/>
+                <thead style="font-size:14px !important; font-weight: bold !important;">
+                    <tr>
+                        <!--th name="th_num" class="text-left" t-if="doc.show_section_product">Pos.</th-->
+                        <th name="th_num" class="text-left">Pos.</th>
+                        <th name="th_description" class="text-left">Beschreibung</th>
+                        <th t-if="doc.show_product_image" name="th_product_image" class="text-center">Product Image</th>
+                        <th t-if="doc.print_all_single_prices" name="th_priceunit" class="text-right">Einzelpreis</th>
+                        <!--th name="th_quantity" class="text-right" t-if="doc.show_section_product">Menge</th-->
+                        <th name="th_quantity" class="text-right">Menge</th>
+                        <t t-if="doc.print_all_single_prices">
+                            <th name="th_discount" t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                                <span>Rabatt.%</span>
+                            </th>
+                        </t>
+                        <th t-if="doc.print_all_single_prices" name="th_subtotal" class="text-right">Gesamtpreis</th>
+                    </tr>
+                </thead>
+            </xpath>
+            <xpath expr="//table[1]/tbody" position="replace">
+                <tbody class="sale_tbody" style="font-size:12px;">
+                    <t t-set="current_subtotal" t-value="0"/>
+                    <t t-set="num" t-value="0"/>
+                    <t t-set="invisible_product_section" t-value="false"/>
+<!--                    <t t-set="order_lines" t-value="doc.order_line"/>-->
+<!--                    <t t-set="zero_price_line" t-value="doc.order_line.filtered(lambda x: not x.price_subtotal and x.display_type != 'line_section')"/>-->
+<!--                    <t t-if="doc.hide_zero_price">-->
+<!--                        <t t-set="order_lines" t-value="doc.order_line - zero_price_line"/>-->
+<!--                    </t>-->
+                    <t t-foreach="doc.order_line" t-as="line">
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+                        <t t-if="line.display_type != 'line_section'">
+                            <t t-set="num" t-value="num + 1"/>
+                        </t>
+                        <tr style="padding-top: 1rem !important; padding-bottom: 1rem !important;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                            <t t-if="not line.display_type and not invisible_product_section">
+                                <!--td name="td_num" class="text-center align-top" t-if="doc.show_section_product"-->
+                                <td name="td_num" class="text-center align-top">
+                                    <span t-esc="num"/>
+                                </td>
+                                <td name="td_name" class="align-top">
+                                    <b>
+                                        <span t-field="line.product_id.display_name"/>
+                                    </b>
+                                    <br/>
+                                    <span t-if="line.name" t-field="line.name"/>
+                                </td>
+                                <td t-if="doc.show_product_image" name="td_product_image" class="text-center align-center">
+                                    <t t-if="line.product_id.image_1920">
+                                        <img t-att-src="image_data_uri(line.product_id.image_1920)" style="max-height:64px;max-width:64px" alt="Product Image"/>
+                                    </t>
+                                </td>
+                                <td t-if="doc.print_all_single_prices" name="td_priceunit" class="text-right align-top">
+                                    <span t-if="line.price_unit or not doc.hide_zero_price" t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                </td>
+                                <td name="td_quantity" class="text-right align-top" >
+                                    <span t-if="line.product_uom_qty or not doc.hide_zero_price" t-field="line.product_uom_qty"/>
+                                    <span t-if="line.product_uom_qty or not doc.hide_zero_price" t-field="line.product_uom"/>
+                                </td>
+                                <t t-if="doc.print_all_single_prices">
+                                    <td t-if="display_discount" class="text-right align-top" groups="product.group_discount_per_so_line">
+                                        <span t-if="line.discount or not doc.hide_zero_price" t-field="line.discount"/>
+                                    </td>
+                                </t>
+                                <td t-if="doc.print_all_single_prices" name="td_subtotal" class="text-right o_price_total align-top">
+                                    <span t-if="line.price_subtotal or not doc.hide_zero_price" t-field="line.price_subtotal"/>
+                                </td>
+                            </t>
+                            <t t-if="line.display_type == 'line_section'">
+                                <td t-if="doc.show_section_product and doc.show_section_price"></td>
+                                <td name="td_section_line" colspan="99">
+                                    <span t-field="line.name" style="float:left;"/>
+                                    <span style="float: right;" t-if="doc.show_section_price" t-esc="section_dict.get(line.id)" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                </td>
+                                <t t-set="current_section" t-value="line"/>
+                                <t t-set="current_subtotal" t-value="0"/>
+                                <t t-if="doc.show_section_product">
+                                    <t t-set="invisible_product_section" t-value="false"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="invisible_product_section" t-value="true"/>
+                                </t>
+                            </t>
+                            <t t-if="line.display_type == 'line_note'">
+                                <td name="td_note_line" colspan="99">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </t>
+                        </tr>
+                        <t t-if="doc.show_section_price and current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section')">
+                            <tr class="is-subtotal text-right" t-if="not doc.show_section_price">
+                                <td name="td_section_subtotal" colspan="99">
+<!--                                    <strong class="mr16">Netto</strong>-->
+                                    <span t-esc="current_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+
+                </tbody>
+            </xpath>
+            <xpath expr="//div[@name='total']" position="replace">
+                <div id="total" class="row" name="total" style="font-size:14px;">
+                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                        <table class="table table-sm">
+                            <tr class="border-black o_subtotal" style="">
+                                <td name="td_amount_untaxed_label">
+                                    <strong>Netto</strong>
+                                </td>
+                                <td name="td_amount_untaxed" class="text-right">
+                                    <t t-set="netto" t-value="doc.amount_untaxed + doc.discount_total"/>
+                                    <span t-out="netto" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                </td>
+                            </tr>
+                            <t t-if="doc.discount_total">
+                                <tr>
+                                    <td name="td_amount_total_label">
+                                        <strong>Rabatte</strong>
+                                    </td>
+                                    <td name="td_amount_total" class="text-right">
+                                        -<span t-field="doc.discount_total"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-set="tax_totals" t-value="json.loads(doc.tax_totals_json)"/>
+                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="text-nowrap" t-esc="amount_by_group['tax_group_name']"/>
+                                            </strong>
+                                        </td>
+                                        <td class="text-right o_price_total">
+                                            <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <tr class="border-black o_total">
+                                <td name="td_amount_total_label">
+                                    <strong>Gesamtbrutto</strong>
+                                </td>
+                                <td name="td_amount_total" class="text-right">
+                                    <span t-field="doc.amount_total"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <t t-if="doc.show_optional_product and doc.sale_order_option_ids and doc.page_break_after_optional_product">
+                    <div style="page-break-after: always;">
+                        <table class="table table-sm o_main_table" style="font-size:12px;">
+                            <thead style="font-size:14px; font-weight: bold !important;">
+                                <td name="td_optional_products" colspan="99">
+                                    <span>
+                                        <strong>Optionale Positionen, Preis nicht in der Gesamtsumme enthalten</strong>
+                                    </span>
+                                </td>
+                                <tr>
+                                    <th name="th_num" class="text-left">Pos.</th>
+                                    <th name="th_description" class="text-left">Beschreibung</th>
+                                    <th t-if="doc.show_product_image" name="th_product_image" class="text-center">Product Image</th>
+                                    <th t-if="doc.show_optional_product_price" name="th_priceunit" class="text-right">Einzelpreis</th>
+                                    <th name="th_quantity" class="text-right">Menge</th>
+                                    <t t-if="doc.show_optional_product_price">
+                                        <th name="th_discount" t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                                            <span>Rabatt.%</span>
+                                        </th>
+                                    </t>
+                                    <th t-if="doc.show_optional_product_price" name="th_subtotal" class="text-right">Gesamtpreis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="num" t-value="0"/>
+                                <t t-foreach="doc.sale_order_option_ids" t-as="line">
+                                    <t t-set="num" t-value="num + 1"/>
+                                    <tr style="padding-top: 1rem !important; padding-bottom: 1rem !important;">
+                                        <td name="td_num" class="text-left align-top">
+                                            <span t-esc="num"/>
+                                        </td>
+                                        <td name="td_name" class="text-left align-top">
+                                            <b>
+                                                <span t-field="line.name"/>
+                                            </b>
+                                        </td>
+                                        <td t-if="doc.show_product_image" name="td_product_image" class="text-center align-center">
+                                            <t t-if="line.product_id.image_1920">
+                                                <img t-att-src="image_data_uri(line.product_id.image_1920)" style="max-height:64px;max-width:64px" alt="Product Image"/>
+                                            </t>
+                                        </td>
+                                        <td t-if="doc.show_optional_product_price" name="td_priceunit" class="text-right align-top">
+                                            <span t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                        </td>
+                                        <td name="td_quantity" class="text-right align-top">
+                                            <span t-field="line.quantity"/>
+                                            <span t-field="line.product_id.uom_id"/>
+                                        </td>
+                                        <t t-if="doc.show_optional_product_price">
+                                            <td t-if="display_discount" class="text-right align-top" groups="product.group_discount_per_so_line">
+                                                <span t-field="line.discount"/>
+                                            </td>
+                                        </t>
+                                        <t t-set="line_subtotal" t-value="line.quantity * line.price_unit * (1 - line.discount / 100)"/>
+                                        <td t-if="doc.show_optional_product_price" name="td_subtotal" class="text-right o_price_total align-top">
+                                            <span t-esc="line_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+                <t t-elif="doc.show_optional_product and doc.sale_order_option_ids">
+                    <div>
+                        <table class="table table-sm o_main_table" style="font-size:12px;">
+                            <thead style="font-size:14px; font-weight: bold !important;">
+                                <td name="td_optional_products" colspan="99">
+                                    <span>
+                                        <strong>Optionale Positionen, Preis nicht in der Gesamtsumme enthalten</strong>
+                                    </span>
+                                </td>
+                                <tr>
+                                    <th name="th_num" class="text-left">Pos.</th>
+                                    <th name="th_description" class="text-left">Beschreibung</th>
+                                    <th t-if="doc.show_product_image" name="th_product_image" class="text-center">Product Image</th>
+                                    <th t-if="doc.show_optional_product_price" name="th_priceunit" class="text-right">Einzelpreis</th>
+                                    <th name="th_quantity" class="text-right">Menge</th>
+                                    <t t-if="doc.show_optional_product_price">
+                                        <th name="th_discount" t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                                            <span>Rabatt.%</span>
+                                        </th>
+                                    </t>
+                                    <th t-if="doc.show_optional_product_price" name="th_subtotal" class="text-right">Gesamtpreis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="num" t-value="0"/>
+                                <t t-foreach="doc.sale_order_option_ids" t-as="line">
+                                    <t t-set="num" t-value="num + 1"/>
+                                    <tr style="padding-top: 1rem !important; padding-bottom: 1rem !important;">
+                                        <td name="td_num" class="text-left align-top">
+                                            <span t-esc="num"/>
+                                        </td>
+                                        <td name="td_name" class="text-left align-top">
+                                            <b>
+                                                <span t-field="line.name"/>
+                                            </b>
+                                        </td>
+                                        <td t-if="doc.show_product_image" name="td_product_image" class="text-center align-center">
+                                            <t t-if="line.product_id.image_1920">
+                                                <img t-att-src="image_data_uri(line.product_id.image_1920)" style="max-height:64px;max-width:64px" alt="Product Image"/>
+                                            </t>
+                                        </td>
+                                        <td t-if="doc.show_optional_product_price" name="td_priceunit" class="text-right align-top">
+                                            <span t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                        </td>
+                                        <td name="td_quantity" class="text-right align-top">
+                                            <span t-field="line.quantity"/>
+                                            <span t-field="line.product_id.uom_id"/>
+                                        </td>
+                                        <t t-if="doc.show_optional_product_price">
+                                            <td t-if="display_discount" class="text-right align-top" groups="product.group_discount_per_so_line">
+                                                <span t-field="line.discount"/>
+                                            </td>
+                                        </t>
+                                        <t t-set="line_subtotal" t-value="line.quantity * line.price_unit * (1 - line.discount / 100)"/>
+                                        <td t-if="doc.show_optional_product_price" name="td_subtotal" class="text-right o_price_total align-top">
+                                            <span t-esc="line_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </xpath>
+            <xpath expr="//div[@name='so_total_summary']" position="after">
+                <div>
+                    <t t-if="doc.terms_and_conditions and doc.show_order_confirmation and doc.page_break_before_post_text">
+                        <div style="page-break-before: always;">
+                            <t t-if="doc.state not in ['sale', 'done']">
+                                <p>AUFTRAGSERTEILUNG:</p>
+                                <t t-if="doc.partner_id.company_type == 'person'">
+                                    Hiermit nehme ich, <span t-out="doc.partner_id.name"/>, <span t-out="doc.partner_id.street"/>, <span t-out="doc.partner_id.zip"/> <span t-out="doc.partner_id.city"/> das
+                                </t>
+                                <t t-else="">
+                                    Hiermit nehmen wir, die Firma <span t-out="doc.partner_id.name"/>, <span t-out="doc.partner_id.street"/>, <span t-out="doc.partner_id.zip"/> <span t-out="doc.partner_id.city"/> das
+                                </t>
+                                <p>Angebot der <span t-out="doc.company_id.name"/> vom <span t-out="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}"/> mit der Nr.: <span t-out="doc.name"/> an und erteile den Auftrag.</p>
+                                <p>Ort, Datum: ____________________________      Unterschrift: ___________________________________________</p>
+                                    <!--<p>Vielen Dank für Ihren Auftrag, sowie Ihr Vertrauen in unser Unternehmen und unseren Produkten.</p>-->
+                            </t>
+                            <t t-out="doc.terms_and_conditions"/>
+                        </div>
+                    </t>
+                    <t t-elif="doc.terms_and_conditions and doc.show_order_confirmation">
+                        <t t-if="doc.state not in ['sale', 'done']">
+                            <p>AUFTRAGSERTEILUNG:</p>
+                            Hiermit nehme ich <span t-out="doc.partner_id.name"/> <span t-out="doc.partner_id.street"/> das
+                            <p>Angebot der <span t-out="doc.company_id.name"/> vom <span t-out="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}"/> mit der Nr.: <span t-out="doc.name"/> an und erteile den Auftrag.</p>
+                            <p>Ort, Datum: ____________________________      Unterschrift: ___________________________________________</p>
+                        </t>
+                        <t t-out="doc.terms_and_conditions"/>
+                    </t>
+                    <p t-if="doc.show_partner_shipping">Anlagenanschrift:</p>
+                    <span t-if="doc.show_partner_shipping" t-out="doc.partner_shipping_id.name"/><br/>
+                    <span t-if="doc.show_partner_shipping" t-out="doc.partner_shipping_id.street"/><br/>
+                    <p t-if="doc.show_partner_shipping"><span t-out="doc.partner_shipping_id.city"/> <span t-out="doc.partner_shipping_id.zip"/></p>
+                    <p t-if="doc.show_partner_shipping">Datum: ____________________________      Unterschrift: ___________________________________________</p>
+                    <t t-if="doc.confirmation_letter and doc.page_break_before_post_text_2">
+                        <div style="page-break-before: always;">
+                        <t t-out="doc.confirmation_letter"/>
+                        </div>
+                    </t>
+                    <t t-elif="doc.confirmation_letter">
+                        <t t-out="doc.confirmation_letter"/>
+                    </t>
+
+                </div>
+            </xpath>
+        </template>
+
+        <template id="remove_optional_products" inherit_id="sale_management.report_saleorder_document_inherit_sale_management">
+            <xpath expr='//div[@t-if="doc.sale_order_option_ids and doc.state in [&#39;draft&#39;, &#39;sent&#39;]"]' position="attributes">
+                <attribute name="class" add="d-none" separator=" "/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

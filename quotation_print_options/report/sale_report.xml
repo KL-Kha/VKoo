@@ -1,0 +1,15 @@
+<odoo>
+    <record id="l10n_de.paperformat_euro_din" model="report.paperformat">
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+    </record>
+
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="paperformat_id"/>
+    </record>
+
+    <record id="sale.action_report_pro_forma_invoice" model="ir.actions.report">
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+</odoo>

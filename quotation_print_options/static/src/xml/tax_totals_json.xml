@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="quotation_print_options.TaxTotalsField" t-inherit="account.TaxTotalsField" t-inherit-mode="extension" owl="1">
+        <xpath expr="//table/tbody/tr[last()]" position="before">
+            <t t-if="totals.value.discount_total">
+                <tr>
+                    <td class="o_td_label">
+                        <label class="o_form_label o_tax_total_label">Total Pre-Discount</label>
+                    </td>
+                    <td>
+                        <span name="amount_undiscounted"
+                            t-esc="totals.value.formatted_amount_undiscounted"
+                            style="white-space: nowrap;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="o_td_label">
+                        <label class="o_form_label o_tax_total_label">Discount</label>
+                    </td>
+                    <td>
+                        <span name="discount_total"
+                            t-esc="totals.value.formatted_discount_total"
+                            style="white-space: nowrap;"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

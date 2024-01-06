@@ -1,0 +1,217 @@
+<odoo>
+
+    <record id="view_order_form_print_options" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Druckoptionen" name="print_options">
+                    <group>
+                        <group string="Logos and Pictures">
+                            <field name="print_logo"/>
+                            <field name="logo_position" attrs="{'required': [('print_logo', '=', True)], 'invisible':[('print_logo','!=',True)]}"/>
+                            <field name="show_product_image"/>
+                        </group>
+                        <group string="Price Visibility">
+                            <field name="hide_zero_price"/>
+                            <field name="print_all_single_prices"/>
+                        </group>
+                        <group string="Invoice Plan">
+                            <field name="show_invoice_plan"/>
+                            <field name="page_break_before_invoice_plan"/>
+                        </group>
+                        <group string="Sections">
+                            <field name="show_section_product"/>
+                            <field name="show_section_price"/>
+                        </group>
+                        <group string="Optional Products">
+                            <field name="show_optional_product"/>
+                            <field name="show_optional_product_price"/>
+                            <field name="page_break_after_optional_product"/>
+                        </group>
+                        <group string="Order Confirmation">
+                            <field name="show_order_confirmation"/>
+                            <field name="show_partner_shipping"/>
+                        </group>
+                    </group>
+                    <group string="Pre Text">
+                        <group>
+                            <field name="pretext_id"/>
+                            <field name="page_break_after_pre_text"/>
+                            <field name="teaser_pic" widget="binary"/>
+                            <field name="show_teaser_pic"/>
+                        </group>
+                        <group>
+                            <field name="pretext" string="Pre Text Param" widget="html"
+                                options="{'style-inline': true}" nolabel="1" readonly="1" force_save="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="terms_and_conditions_id"/>
+                            <field name="page_break_before_post_text"/>
+                        </group>
+                        <group>
+                            <field name="terms_and_conditions" widget="html"
+                                options="{'style-inline': true}" nolabel="1" readonly="1" force_save="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="confirmation_letter_id"/>
+                            <field name="page_break_before_post_text_2"/>
+                        </group>
+                        <group>
+                            <field name="confirmation_letter" widget="html"
+                                options="{'style-inline': true}" nolabel="1" readonly="1" force_save="1"/>
+                        </group>
+                    </group>
+                     <group string="Image">
+                        <field name="teaser_pic" widget='image'/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="client_order_ref" position="move"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_template_pretext_tree" model="ir.ui.view">
+        <field name="name">sale.order.template.pretext.tree</field>
+        <field name="model">sale.order.template.pretext</field>
+        <field name="arch" type="xml">
+            <tree string="Quotation / Order Template Pre Texts">
+                <field name="name"/>
+                <field name="pretext_preview" widget="html" options="{'style-inline': true}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_order_template_pretext_form" model="ir.ui.view">
+        <field name="name">sale.order.template.pretext.form</field>
+        <field name="model">sale.order.template.pretext</field>
+        <field name="arch" type="xml">
+            <form string="Quotation / Order Template Pre Text">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                    <group string="Pre Text">
+                        <field name="pretext" nolabel="1" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_order_template_pretext_action" model="ir.actions.act_window">
+        <field name="name">Quotation / Order Template Pre Texts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.template.pretext</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_print_options"
+              parent="sale.menu_sale_config"
+              sequence="5"
+              name="Print Options"/>
+
+    <menuitem id="sale_order_template_pretext_menu"
+              action="sale_order_template_pretext_action"
+              parent="menu_print_options"
+              sequence="3"
+              name="Quotation Pre-text"
+              groups="sales_team.group_sale_manager"/>
+
+    <record id="sale_order_template_terms_and_conditions_tree" model="ir.ui.view">
+        <field name="name">sale.order.template.terms_and_conditions.tree</field>
+        <field name="model">sale.order.template.terms.and.conditions</field>
+        <field name="arch" type="xml">
+            <tree string="Quotation / Order Template Post Text">
+                <field name="name"/>
+                <field name="terms_and_conditions_preview" widget="html" options="{'style-inline': true}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_order_template_terms_and_conditions_form" model="ir.ui.view">
+        <field name="name">sale.order.template.terms_and_conditions.form</field>
+        <field name="model">sale.order.template.terms.and.conditions</field>
+        <field name="arch" type="xml">
+            <form string="Quotation / Order Template Post Text">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                    <group string="Terms And Conditions">
+                        <field name="terms_and_conditions" nolabel="1" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_order_template_terms_and_conditions_action" model="ir.actions.act_window">
+        <field name="name">Quotation / Order Template Post Text</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.template.terms.and.conditions</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sale_order_template_terms_and_conditions_menu"
+              action="sale_order_template_terms_and_conditions_action"
+              parent="menu_print_options"
+              sequence="3"
+              name="Quotation Post-text 1"
+              groups="sales_team.group_sale_manager"/>
+
+    <record id="sale_order_template_confirmation_letter_tree" model="ir.ui.view">
+        <field name="name">sale.order.confirmation.letter.tree</field>
+        <field name="model">sale.order.confirmation.letter</field>
+        <field name="arch" type="xml">
+            <tree string="Quotation / Order Confirmation Letter">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_order_template_confirmation_letter_form" model="ir.ui.view">
+        <field name="name">sale.order.confirmation.letter.form</field>
+        <field name="model">sale.order.confirmation.letter</field>
+        <field name="arch" type="xml">
+            <form string="Quotation / Order Confirmation Letter">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                    <group string="Confirmation Letter">
+                        <field name="template" nolabel="1" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_order_confirmation_letter" model="ir.actions.act_window">
+        <field name="name">Quotation / Order Confirmation Letter</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.confirmation.letter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sale_order_template_confirmation_letter"
+              action="action_sale_order_confirmation_letter"
+              parent="menu_print_options"
+              sequence="5"
+              name="Quotation Post-text 2"
+              groups="sales_team.group_sale_manager"/>
+
+</odoo>
