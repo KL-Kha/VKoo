@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_quotation_tree_with_onboarding_inherit" model="ir.ui.view">
+        <field name="name">view.in.sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="ocr_status" string="OCR Status" readonly="1" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="order_quotation_digitalization" model="ir.ui.view">
+        <field name="name">sale.order.quotation.digitalization</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="ocr_send" class="oe_highlight" string="Send for Digitalization" type="object"
+                    attrs="{'invisible': [('state', 'not in', ['draft'])]}"
+                    confirm="Are you sure, you want to Send for Digitalization?"/>
+            </xpath>
+            <xpath expr="//page[@name='customer_signature']" position="after">
+                <page string="OCR Data" name="ocr_data" groups="base.group_system">
+                    <group>
+                        <field name="ocr_data" string="OCR Data"
+                            readonly="1" attrs="{'invisible': [('ocr_data', '=', False)]}"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_ocr_send_sale_order" model="ir.actions.server">
+        <field name="name">Send for Digitalization</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.ocr_send()</field>
+    </record>
+</odoo>

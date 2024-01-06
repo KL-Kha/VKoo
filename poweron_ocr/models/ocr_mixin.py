@@ -18,6 +18,9 @@ class OCRMixin(models.AbstractModel):
         ('failed', 'Failed'),
         ('none', 'N/A'),
     ], default='none')
+
+    LIST_SYMBOL = ['€', '$', 'د.إ', 'Afs', 'L', 'դր.', 'ƒ', 'Kz', '$', '$', 'Afl.', 'm', 'KM', 'Bds$', '৳', 'лв', 'BD', 'FBu', 'BD$', '$', 'Bs.', 'R$', 'B$', 'Nu.', 'P', 'Br', 'BR', 'BZ$', '$', 'Fr', 'CHF', '$', '$', '¥', '¥', '$', '$', '$', 'Kč', 'Fdj', 'kr', 'RD$', 'DA', 'E£', 'Nfk', 'Br', 'FJ$', '£', '£', 'ლ', 'GH¢', '£', 'D', 'FG', 'Q', '$', '$', 'L', 'kn', 'G', 'Ft', 'Rp', '₪', '₹', ' ع.د', '﷼', 'kr', '$', ' د.ا ', '¥', 'KSh', 'лв', '៛', 'CF', '₩', '₩', ' د.ك ', '$', 'лв', '₭', 'ل.ل', 'Rs', 'L$', 'M', 'Lt', 'Ls', ' ل.د ', 'DH', 'L', 'Ar', 'ден', 'K', '₮', 'MOP$', 'UM', 'UM', 'Rs', '.ރ', 'MK', '$', 'RM', 'MT', '$', '₦', 'C$', 'kr', '₨', '$', 'ر.ع.', 'B/.', 'S/', 'K', '₱', 'Rs.', 'zł', '₲', 'QR', 'lei', 'din.', 'руб', 'RF', 'SR', 'SI$', 'SR', 'ج.س.', 'kr', 'S$', '£', 'Le', 'Sh.', '$', '£', 'Db', 'Db', '¢', '£', 'E', '฿', 'TJS', 'T', 'DT', 'T$', '₺', '$', 'NT$', 'TSh', '₴', 'USh', '$', '$', '$', 'лв', 'Bs.F', 'Bs', '₫', 'VT', 'WS$', 'FCFA', '$', 'CFA', 'XPF', '﷼', 'R', 'ZK', 'Z$']
+
     ocr_data = fields.Text()
     default_ocr_product_id = fields.Many2one(comodel_name='product.product')
     default_ocr_partner_id = fields.Many2one(comodel_name='res.partner')
@@ -73,6 +76,8 @@ class OCRMixin(models.AbstractModel):
                     vals.update({'product_id': self.default_ocr_product_id.id})
                 for i in range(0, len(entity.properties)):
                     col = entity.properties[i]
+                    if col.text_anchor.content in self.LIST_SYMBOL:
+                        continue
                     ocr_data.update({
                         f"{col.type_}_{ocr_line_number}": col.normalized_value.text or col.text_anchor.content
                     })
@@ -111,7 +116,10 @@ class OCRMixin(models.AbstractModel):
         try:
             gg_project_id = tools.config['gg_project_id']
             gg_location = tools.config['gg_location']
-            gg_processor_id = tools.config['gg_processor_id']
+            if self._name == 'sale.order':
+                gg_processor_id = tools.config['gg_processor_id_so']
+            else:
+                gg_processor_id = tools.config['gg_processor_id']
             gg_mime_type = tools.config['gg_mime_type']
             gg_default_auth_path = tools.config['gg_default_auth_path']
         except Exception as err:
