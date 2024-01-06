@@ -8,10 +8,22 @@
             <xpath expr="//div[@name='integration']" position="after">
                 <h2>DokuScan</h2>
                 <div class="row mt16 o_settings_container">
-                    <!-- 19% tax -->
+                    <!-- Vendor Bill -->
                     <div class="col-12 col-lg-6 o_setting_box"
                         id="dokuscan_tax_setting"
-                        title="If this checkbox is ticked, set SOL lines to 19% if mentioned in Totals on original document.">
+                        title="Activate Doku Scan in Vendor Bill">
+                        <div class="o_setting_left_pane">
+                            <field name="dokuscan_vendor_bill"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="dokuscan_vendor_bill"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                        </div>
+                    </div>
+
+                    <!-- Doku Scan Activate -->
+                    <div class="col-12 col-lg-6 o_setting_box"
+                        id="dokuscan_overall_tax">
                         <div class="o_setting_left_pane">
                             <field name="is_dokuscan_overall_tax"/>
                         </div>
@@ -23,34 +35,62 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Default OCR Product for Purchase -->
+                </div>
+                <div class="row mt16 o_settings_container">
                     <div class="col-12 col-lg-6 o_setting_box"
-                        id="dokuscan_purchase_setting"
-                        title="Default Product will be used in order lines when scanned">
-                        <div class="o_setting_left_pane"/>
+                        id="dokuscan_tax_setting"
+                        title="Activate Doku Scan in Purchase Order">
+                        <div class="o_setting_left_pane">
+                            <field name="dokuscan_purchase_order"/>
+                        </div>
                         <div class="o_setting_right_pane">
-                            <label for="ocr_purchase_product_id"/>
+                            <label for="dokuscan_purchase_order"/>
                             <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="text-muted">
-                                Set default product for Purchase Order Line when AI doesn't succeed to scan the product from document
+                            <div class="content-group" attrs="{'invisible': [('dokuscan_purchase_order', '=', False)]}">
+                                <div class="row mt16">
+                                    <label for="ocr_purchase_vendor_id" class="col-lg-4 o_light_label" string="Default Vendor"/>
+                                    <field name="ocr_purchase_vendor_id"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Default Vendor for Purchase when not found by AI</span>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="ocr_purchase_product_id" class="col-lg-4 o_light_label" string="Default Product"/>
+                                    <field name="ocr_purchase_product_id"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Default Product for Purchase when not found by AI</span>
+                                </div>
                             </div>
-                            <field name="ocr_purchase_product_id"/>
                         </div>
                     </div>
                 </div>
                 <div class="row mt16 o_settings_container">
-                    <!-- Default OCR Vendor -->
                     <div class="col-12 col-lg-6 o_setting_box"
-                        id="dokuscan_vendor_setting"
-                        title="Default vendor will be applied when AI doesn't succeed to scan the vendor from document">
-                        <div class="o_setting_left_pane" />
+                        id="dokuscan_tax_setting"
+                        title="Activate Doku Scan in Sale Order">
+                        <div class="o_setting_left_pane">
+                            <field name="dokuscan_sale_order"/>
+                        </div>
                         <div class="o_setting_right_pane">
-                            <label for="ocr_purchase_vendor_id"/>
+                            <label for="dokuscan_sale_order"/>
                             <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                            <div class="text-muted">
-                                Set default vendor for Doku Scan when AI doesn't succeed to scan the vendor from document
+                            <div class="content-group" attrs="{'invisible': [('dokuscan_sale_order', '=', False)]}">
+                                <div class="row mt16">
+                                    <label for="ocr_sale_customer_id" class="col-lg-4 o_light_label" string="Default Customer"/>
+                                    <field name="ocr_sale_customer_id"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Default Customer for Sale Order when not found by AI</span>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="ocr_sale_product_id" class="col-lg-4 o_light_label" string="Default Product"/>
+                                    <field name="ocr_sale_product_id"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Default Product for Sale Order when not found by AI</span>
+                                </div>
                             </div>
-                            <field name="ocr_purchase_vendor_id"/>
                         </div>
                     </div>
                 </div>

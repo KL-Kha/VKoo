@@ -1,6 +1,6 @@
 import logging
 
-from odoo import models
+from odoo import models, fields, _
 
 _logger = logging.getLogger(__name__)
 
@@ -28,15 +28,12 @@ OCR_INVOICE_LINE_MAPPING = {
     'line_item/tax': 'tax_ids',
 }
 
-VENDOR_SEARCH_FIELDS = ['vat', 'name', 'email']
-
 
 class VendorBill(models.Model):
     _name = 'account.move'
     _inherit = ['account.move', 'ocr.mixin']
 
-    def _get_vendor_search_fields(self):
-        return VENDOR_SEARCH_FIELDS
+    activate_dokuscan = fields.Boolean(related='company_id.dokuscan_vendor_bill')
 
     def _get_ocr_object_mapping(self):
         return OCR_INVOICE_MAPPING

@@ -71,9 +71,7 @@ class OCRMixin(models.AbstractModel):
 
             # object lines parsing
             if key == 'line_item' and ocr_object_line_mapping:
-                vals = {}
-                if self.default_ocr_product_id.id:
-                    vals.update({'product_id': self.default_ocr_product_id.id})
+                vals = {'is_mute': True}
                 for i in range(0, len(entity.properties)):
                     col = entity.properties[i]
                     if col.text_anchor.content in self.LIST_SYMBOL:
@@ -99,7 +97,7 @@ class OCRMixin(models.AbstractModel):
                 ocr_line_number += 1
 
         object_data.update({'ocr_data': json.dumps(ocr_data, indent=4)})
-        
+
         # partner parsing
         partner_id = self._prepare_partner_data(partner_data)
         if partner_id:
@@ -107,6 +105,7 @@ class OCRMixin(models.AbstractModel):
 
         object_line_key = self._get_object_line_key()
         if object_line_key:
+            line_ids = self._assign_line_product(line_ids)
             object_data.update({object_line_key: line_ids})
 
         return object_data
@@ -203,35 +202,56 @@ class OCRMixin(models.AbstractModel):
         return [(6, 0, tax_ids)]
 
     def _prepare_partner_data(self, partner_data):
-        partner_env = self.env['res.partner']
+        partner = self.env['res.partner']
         bank_env = self.env['res.partner.bank']
-        domain = []
-        for field in self._get_partner_search_fields():
+        for field, operator in self._get_partner_search_fields().items():
             field_val = partner_data.get(field)
             if field_val:
-                domain = expression.OR([domain, [(field, 'ilike', field_val)]])
+                domain = [(field, operator, field_val)]
+                partner = partner.search(domain, limit=1)
+            if partner:
+                partner.vat = partner.vat or partner_data.get('vat')
+                break
 
-        partner = domain and partner_env.search(domain, limit=1) \
-            or partner_data.get('name') and partner_env.create(partner_data) \
-            or self.default_ocr_partner_id
-        if partner:
-            if not partner.vat and partner_data.get('vat'):
-                partner.vat = partner_data.get('vat')
-            # prepare partner's bank
-            iban = partner_data.get('iban') and partner_data.pop('iban') or False
-            bank_exist = partner.bank_ids.filtered(lambda b: b.acc_number == iban)
-            if not bank_exist and iban:
-                bank_vals = {
-                    'acc_number': iban,
-                    'partner_id': partner.id,
-                    'company_id': self.company_id.id
-                }
-                bank_env.create(bank_vals)
+        if not partner:
+            partner_data.update({'company_type': 'company'})
+            if partner_data.get('name'):
+                partner = partner.create(partner_data)
+            else:
+                partner = self.default_ocr_partner_id
+
+        # prepare partner's bank
+        iban = partner_data.get('iban') and partner_data.pop('iban') or False
+        bank_exist = partner.bank_ids.filtered(lambda b: b.acc_number == iban)
+        if not bank_exist and iban:
+            bank_vals = {
+                'acc_number': iban,
+                'partner_id': partner.id,
+                'company_id': self.company_id.id
+            }
+            bank_env.create(bank_vals)
 
         return partner.id or False
 
+    def _assign_line_product(self, line_ids):
+        object_line_ids = line_ids
+        for i, line in enumerate(line_ids[1:]):
+            line_name = line[2].get('name', '')
+            line_name.replace("\n", " ")
+            product_id = self.env['product.product'].search([('name', '%', line_name)], limit=1)
+            if self._name == 'sale.order':
+                object_line_ids[i + 1][2].update({'product_id': product_id.id or self.default_ocr_product_id.id})
+            else:
+                object_line_ids[i + 1][2].update({'product_id': product_id.id or self.default_ocr_product_id.id})
+        return object_line_ids
+
     def _get_partner_search_fields(self):
-        return ['name']
+        # return field_name and search_operator
+        return {
+            'vat': '=',     # exact search
+            'email': '=',     # exact search
+            'name': '%'     # fuzzy search
+        }
 
     def _get_ocr_partner_mapping(self):
         return {

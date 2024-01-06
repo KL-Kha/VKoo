@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError
 OCR_SALE_MAPPING = {
     'invoice_date': 'date_order',
     'due_date': 'invoice_date_due',
-    'invoice_id': 'reference',
+    'invoice_id': 'client_order_ref',
     'bill_notes': 'note',
 }
 
@@ -15,15 +15,13 @@ OCR_SALE_LINE_MAPPING = {
     'line_item/tax': 'tax_id',
 }
 
-CUSTOMER_SEARCH_FIELDS = ['vat', 'name', 'email']
-
-
 class SaleOrder(models.Model):
     _name = 'sale.order'
     _inherit = ['sale.order', 'ocr.mixin']
 
-    default_ocr_product_id = fields.Many2one(related="company_id.ocr_purchase_product_id")
-    default_ocr_partner_id = fields.Many2one(related="company_id.ocr_purchase_vendor_id")
+    default_ocr_product_id = fields.Many2one(related="company_id.ocr_sale_product_id")
+    default_ocr_partner_id = fields.Many2one(related="company_id.ocr_sale_customer_id")
+    activate_dokuscan = fields.Boolean(related='company_id.dokuscan_sale_order')
 
     def ocr_send(self):
         if not self.default_ocr_product_id:
@@ -31,9 +29,6 @@ class SaleOrder(models.Model):
         if not self.default_ocr_partner_id:
             raise ValidationError(_("Please configure OCR Default Customer in General Setting"))
         return super().ocr_send()
-
-    def _get_vendor_search_fields(self):
-        return CUSTOMER_SEARCH_FIELDS
 
     def _get_ocr_object_mapping(self):
         return OCR_SALE_MAPPING
@@ -43,3 +38,14 @@ class SaleOrder(models.Model):
 
     def _get_object_line_key(self):
         return 'order_line'
+    
+    def _get_ocr_partner_mapping(self):
+        return {
+            'receiver_name': 'name',
+            'receiver_phone': 'phone',
+            'receiver_email': 'email',
+            'receiver_website': 'website',
+            'receiver_address': 'street',
+            'receiver_tax_id': 'vat',
+            'receiver_iban': 'iban',
+        }
