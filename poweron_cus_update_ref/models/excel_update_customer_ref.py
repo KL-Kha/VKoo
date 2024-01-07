@@ -6,6 +6,7 @@ from odoo.exceptions import ValidationError
 from urllib.parse import urlparse, parse_qs
 import pandas as pd
 import re
+import openpyxl
 
 _logger = logging.getLogger(__name__)
 
