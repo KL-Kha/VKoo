@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_google_sheets_integration,access_google_sheets_integration,model_google_sheets_integration,base.group_user,1,1,1,1
+access_excel_update_customer_ref,access_excel_update_customer_ref,model_excel_update_customer_ref,base.group_user,1,1,1,1

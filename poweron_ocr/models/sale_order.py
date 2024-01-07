@@ -18,7 +18,7 @@ OCR_SALE_LINE_MAPPING = {
 }
 
 class SaleOrder(models.Model):
-    _name = 'sale.order'
+    _name = 'sale.order'    
     _inherit = ['sale.order', 'ocr.mixin']
 
     default_ocr_product_id = fields.Many2one(related="company_id.ocr_sale_product_id")

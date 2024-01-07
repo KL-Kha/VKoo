@@ -15,5 +15,5 @@ class ResConfigSettings(models.TransientModel):
     excel_path = fields.Char('Excel Patch',related='company_id.excel_path', readonly=False)
 
     def update_customer_by_excel(self):
-        record = self.env['google.sheets.integration'].search([])
+        record = self.env['excel.update.customer.ref'].search([])
         record.get_google_sheet_data()
