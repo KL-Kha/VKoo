@@ -14,7 +14,7 @@ class ExcelUpdateCustomerRef(models.Model):
     _name = 'excel.update.customer.ref'
 
     @api.model
-    def get_google_sheet_data(self):
+    def get_update_excel_customer(self):
 
         excel_path = self.env.user.company_id.excel_path
         df = pd.read_excel(excel_path, header=None, skiprows=7, usecols=[0, 1, 3, 4, 9, 11])

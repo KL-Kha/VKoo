@@ -16,4 +16,4 @@ class ResConfigSettings(models.TransientModel):
 
     def update_customer_by_excel(self):
         record = self.env['excel.update.customer.ref'].search([])
-        record.get_google_sheet_data()
+        record.get_update_excel_customer()
