@@ -6,6 +6,8 @@ OCR_SALE_MAPPING = {
     'due_date': 'invoice_date_due',
     'invoice_id': 'client_order_ref',
     'bill_notes': 'note',
+    'sale_person': 'user_id',
+    'pre_text': 'pretext_id',
 }
 
 OCR_SALE_LINE_MAPPING = {
@@ -48,4 +50,5 @@ class SaleOrder(models.Model):
             'receiver_address': 'street',
             'receiver_tax_id': 'vat',
             'receiver_iban': 'iban',
+            'so_customer_ref': 'ref',
         }

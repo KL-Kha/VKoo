@@ -46,6 +46,17 @@ class OCRMixin(models.AbstractModel):
             })
             if key in ocr_object_mapping.keys():
                 value = entity.normalized_value.text or entity.text_anchor.content
+                if key == 'sale_person':
+                    value = self.env['res.users'].search([('name','ilike',entity.normalized_value.text or entity.text_anchor.content)],limit=1)
+                    if not value:
+                        continue
+                if key == 'pre_text':
+                    vals = {
+                        'name': self.name,
+                        'pretext':value,
+                    }
+                    pretext_id = self.env['sale.order.template.pretext'].create(vals)
+                    value = pretext_id.id
                 if 'date' in key:
                     value = self.get_date(value)
                 field_name = ocr_object_mapping.get(key)
@@ -71,7 +82,7 @@ class OCRMixin(models.AbstractModel):
 
             # object lines parsing
             if key == 'line_item' and ocr_object_line_mapping:
-                vals = {'is_mute': True}
+                vals = {}
                 for i in range(0, len(entity.properties)):
                     col = entity.properties[i]
                     if col.text_anchor.content in self.LIST_SYMBOL:
@@ -208,6 +219,8 @@ class OCRMixin(models.AbstractModel):
             field_val = partner_data.get(field)
             if field_val:
                 domain = [(field, operator, field_val)]
+                if operator == 'ilike':
+                    domain = [(field, operator, '%'+ field_val +'%')]
                 partner = partner.search(domain, limit=1)
             if partner:
                 partner.vat = partner.vat or partner_data.get('vat')
@@ -238,7 +251,7 @@ class OCRMixin(models.AbstractModel):
         for i, line in enumerate(line_ids[1:]):
             line_name = line[2].get('name', '')
             line_name.replace("\n", " ")
-            product_id = self.env['product.product'].search([('name', '%', line_name)], limit=1)
+            product_id = self.env['product.product'].search([('name', 'ilike', line_name)], limit=1)
             if self._name == 'sale.order':
                 object_line_ids[i + 1][2].update({'product_id': product_id.id or self.default_ocr_product_id.id})
             else:
@@ -250,7 +263,7 @@ class OCRMixin(models.AbstractModel):
         return {
             'vat': '=',     # exact search
             'email': '=',     # exact search
-            'name': '%'     # fuzzy search
+            'name': 'ilike'     # fuzzy search
         }
 
     def _get_ocr_partner_mapping(self):
