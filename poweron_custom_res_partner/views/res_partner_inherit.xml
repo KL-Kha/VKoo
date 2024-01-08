@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_form_view_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//div[@class='o_address_format']" position="replace">
+                <div class="o_address_format">
+                    <div class="row">
+                        <div class="col">
+                            <field name="street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" on_change="1" modifiers="{'readonly': [['type', '=', 'contact'], ['parent_id', '!=', false]]}"/>
+                        </div>
+                        <div class="col">
+                            <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" modifiers="{'readonly': [['type', '=', 'contact'], ['parent_id', '!=', false]]}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col">
+                            <field name="city" placeholder="City" class="o_address_city" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" on_change="1" modifiers="{'readonly': [['type', '=', 'contact'], ['parent_id', '!=', false]]}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col">
+                            <field name="state_id" placeholder="State" class="o_address_state" options="{'no_open': True, 'no_quick_create': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" on_change="1" modifiers="{'readonly': [['type', '=', 'contact'], ['parent_id', '!=', false]]}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <field name="zip" placeholder="ZIP" class="o_address_zip" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="col">
+                            <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
