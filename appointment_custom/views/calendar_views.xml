@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="calendar_event_view_form_inherit_appointment" model="ir.ui.view">
+        <field name="name">calendar.event.view.form.inherit.appointment.custom</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="appointment.calendar_event_view_form" />
+        <field name="arch" type="xml">
+            <field name="appointment_resource_id" position="attributes">
+                <attribute name="invisible">false</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
