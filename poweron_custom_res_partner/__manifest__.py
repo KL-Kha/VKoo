@@ -6,7 +6,6 @@
     'depends': ['base','account'],
     'data': [
         'views/account_report.xml',
-
         'views/res_partner_inherit.xml',
     ],
 }
