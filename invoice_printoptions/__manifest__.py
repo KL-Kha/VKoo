@@ -1,0 +1,20 @@
+{
+    'name': "Print Options for Invoices",
+    'summary': "Customization on Invoice Template",
+    'version': '15.0.1.0.0',
+    'author': "Simplify-ERP™",
+    'category': 'Accounting',
+    'website': 'https://simplify-erp.com',
+    'license': 'LGPL-3',
+    'depends': ["account", "quotation_print_options", "base_automation"],
+    'data': [
+        'data/data.xml',
+        'security/ir.model.access.csv',
+        'views/account_move.xml',
+        'view/account_report',
+        'views/pretext.xml',
+        'report/invoice_report.xml',
+    ],
+    'auto_install': False,
+    'installable': True,
+}

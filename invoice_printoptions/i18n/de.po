@@ -1,0 +1,213 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* invoice_printoptions
+#
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.poweron_invoice_body
+msgid "<strong>Yet to be paid</strong>"
+msgstr "Noch zu zahlen"
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.poweron_document_tax_totals
+msgid "<strong>Untaxed Amount</strong>"
+msgstr "Nettobetrag"
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.poweron_document_tax_totals
+msgid "<strong>Total</strong>"
+msgstr "Gesamtbetrag"
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.poweron_document_tax_totals
+msgid "<strong>Untaxed Amount</strong>"
+msgstr "Nettobetrag"
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.poweron_invoice_body
+msgid "<strong>Yet to be paid</strong>"
+msgstr "Noch zu zahlen"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields.selection,name:invoice_printoptions.selection__account_move__logo_position__center
+msgid "Center"
+msgstr "Mittig"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__create_uid
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__create_date
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__display_name
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.account_move_form_view_inherit
+msgid "Druckoptionen"
+msgstr ""
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__id
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__id
+msgid "ID"
+msgstr "Id."
+
+#. module: invoice_printoptions
+#: model:ir.ui.menu,name:invoice_printoptions.invoice_template_pretext_menu
+msgid "Invoice Pre-text"
+msgstr "Rechnung Vortext"
+
+#. module: invoice_printoptions
+#: model:ir.model,name:invoice_printoptions.model_invoice_template_terms_and_conditions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.invoice_template_terms_and_conditions_form
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.invoice_template_terms_and_conditions_tree
+msgid "Invoice Template Post Text"
+msgstr "Rechnungsnachtexte"
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.invoice_template_pretext_form
+msgid "Invoice Template Pre Text"
+msgstr "Rechnungsvortexte"
+
+#. module: invoice_printoptions
+#: model:ir.actions.act_window,name:invoice_printoptions.invoice_template_pretext_action
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.invoice_template_pretext_tree
+msgid "Invoice Template Pre Texts"
+msgstr "Rechnungsvortexte"
+
+#. module: invoice_printoptions
+#: model:ir.model,name:invoice_printoptions.model_invoice_template_pretext
+msgid "Invoice Template Pretext"
+msgstr ""
+
+#. module: invoice_printoptions
+#: model:ir.model,name:invoice_printoptions.model_account_move
+msgid "Journal Entry"
+msgstr "Buchungseintrag"
+
+#. module: invoice_printoptions
+#: model:ir.model,name:invoice_printoptions.model_account_move_line
+msgid "Journal Item"
+msgstr "Buchungszeile"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext____last_update
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__write_uid
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__write_date
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt akualisiert am"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields.selection,name:invoice_printoptions.selection__account_move__logo_position__left
+msgid "Left"
+msgstr "Links"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_bank_statement_line__print_logo
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_move__print_logo
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_payment__print_logo
+msgid "Logo"
+msgstr "Logo"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_bank_statement_line__logo_position
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_move__logo_position
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_payment__logo_position
+msgid "Logo Position"
+msgstr "Logo Position"
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.poweron_invoice_body
+msgid "Pos."
+msgstr "Pos."
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__terms_and_conditions
+msgid "Post Text"
+msgstr "Nachtext"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__terms_and_conditions_preview
+msgid "Post Text Preview"
+msgstr "Nachtext Vorschau"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_bank_statement_line__pretext
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_move__pretext
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_payment__pretext
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__pretext
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.account_move_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.invoice_template_pretext_form
+msgid "Pre Text"
+msgstr "Vortext"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__pretext_preview
+msgid "Pre Text Preview"
+msgstr "Vortext Vorschau"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_bank_statement_line__pretext_id
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_move__pretext_id
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_payment__pretext_id
+msgid "Pre-Text"
+msgstr "Vortext"
+
+#. module: invoice_printoptions
+#: model:ir.ui.menu,name:invoice_printoptions.menu_invoice_print_options
+msgid "Print Options"
+msgstr "Druckoptionen"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields.selection,name:invoice_printoptions.selection__account_move__logo_position__right
+msgid "Right"
+msgstr "Rechts"
+
+#. module: invoice_printoptions
+#: model:ir.model,name:invoice_printoptions.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Kundenauftragszeile"
+
+#. module: invoice_printoptions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_pretext__name
+#: model:ir.model.fields,field_description:invoice_printoptions.field_invoice_template_terms_and_conditions__name
+msgid "Template Name"
+msgstr "Vorlage Name"
+
+#. module: invoice_printoptions
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.invoice_template_terms_and_conditions_form
+msgid "Terms And Conditions"
+msgstr "Rechnungsnachtext"
+
+#. module: invoice_printoptions
+#: model:ir.actions.act_window,name:invoice_printoptions.invoice_template_terms_and_conditions_action
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_bank_statement_line__terms_and_conditions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_bank_statement_line__terms_and_conditions_id
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_move__terms_and_conditions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_move__terms_and_conditions_id
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_payment__terms_and_conditions
+#: model:ir.model.fields,field_description:invoice_printoptions.field_account_payment__terms_and_conditions_id
+#: model:ir.ui.menu,name:invoice_printoptions.invoice_template_terms_and_conditions_menu
+#: model_terms:ir.ui.view,arch_db:invoice_printoptions.account_move_form_view_inherit
+msgid "Terms and Conditions"
+msgstr "Rechnungsnachtext"

@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="downpayment_invoice_name" model="base.automation">
+            <field name="name">Change name based on is_downpayment</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.state == 'posted':
+    downpayment_product = env['ir.config_parameter'].sudo().get_param('sale.default_deposit_product_id')
+    if len(record.invoice_line_ids) == 1 and int(record.invoice_line_ids[0].product_id.id) == int(downpayment_product) and not record.is_added_prefix:
+        order = env['sale.order'].sudo().search([('invoice_ids', 'in', [record.id])], limit=1)
+        if order and (len(order.invoice_ids) == 1 or (len(order.invoice_ids) > 1 and not order.invoice_ids.filtered(lambda x: x.state == 'posted'))):
+            record.write({'name': 'A' + record.name, 'is_added_prefix': True})
+            </field>
+            <field name="active" eval="True"/>
+            <field name="trigger">on_write</field>
+            <field name="trigger_field_ids" eval="[(6, 0, [ref('account.field_account_move__state')])]"/>
+        </record>
+    </data>
+</odoo>

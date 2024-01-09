@@ -1,0 +1,45 @@
+<odoo>
+    <record id="account_move_form_view_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.view.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Druckoptionen" name="print_options">
+                    <group>
+                        <group>
+                            <field name="print_logo"/>
+                        </group>
+                        <group>
+                            <field name="logo_position" attrs="{'required': [('print_logo', '=', True)], 'invisible':[('print_logo','!=',True)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="pretext_id"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group string="Pre Text">
+                        <field name="pretext" nolabel="1" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="terms_and_conditions_id"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group string="Terms and Conditions">
+                        <field name="terms_and_conditions" nolabel="1" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/control/create[@name='add_note_control']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

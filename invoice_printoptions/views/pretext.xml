@@ -1,0 +1,92 @@
+<odoo>
+    <record id="invoice_template_pretext_tree" model="ir.ui.view">
+        <field name="name">invoice.template.pretext.tree</field>
+        <field name="model">invoice.template.pretext</field>
+        <field name="arch" type="xml">
+            <tree string="Invoice Template Pre Texts">
+                <field name="name"/>
+                <field name="pretext_preview" widget="html" options="{'style-inline': true}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="invoice_template_pretext_form" model="ir.ui.view">
+        <field name="name">invoice.template.pretext.form</field>
+        <field name="model">invoice.template.pretext</field>
+        <field name="arch" type="xml">
+            <form string="Invoice Template Pre Text">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                    <group string="Pre Text">
+                        <field name="pretext" nolabel="1" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="invoice_template_pretext_action" model="ir.actions.act_window">
+        <field name="name">Invoice Template Pre Texts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.template.pretext</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_invoice_print_options"
+              parent="account.menu_finance_configuration"
+              sequence="0"
+              name="Print Options"/>
+
+    <menuitem id="invoice_template_pretext_menu"
+              action="invoice_template_pretext_action"
+              parent="menu_invoice_print_options"
+              sequence="3"
+              name="Invoice Pre-text"/>
+
+    <record id="invoice_template_terms_and_conditions_tree" model="ir.ui.view">
+        <field name="name">invoice.template.terms_and_conditions.tree</field>
+        <field name="model">invoice.template.terms.and.conditions</field>
+        <field name="arch" type="xml">
+            <tree string="Invoice Template Post Text">
+                <field name="name"/>
+                <field name="terms_and_conditions_preview" widget="html" options="{'style-inline': true}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="invoice_template_terms_and_conditions_form" model="ir.ui.view">
+        <field name="name">invoice.template.terms_and_conditions.form</field>
+        <field name="model">invoice.template.terms.and.conditions</field>
+        <field name="arch" type="xml">
+            <form string="Invoice Template Post Text">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                    <group string="Terms And Conditions">
+                        <field name="terms_and_conditions" nolabel="1" widget="html" options="{'style-inline': true}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="invoice_template_terms_and_conditions_action" model="ir.actions.act_window">
+        <field name="name">Terms and Conditions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.template.terms.and.conditions</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="invoice_template_terms_and_conditions_menu"
+              action="invoice_template_terms_and_conditions_action"
+              parent="menu_invoice_print_options"
+              sequence="3"
+              name="Terms and Conditions"/>
+</odoo>
