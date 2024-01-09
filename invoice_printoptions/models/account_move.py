@@ -57,6 +57,20 @@ class AccountMove(models.Model):
         if len(self.invoice_line_ids) == 1 and self.invoice_line_ids[0]._is_downpayment_line():
             return True
         return False
+    
+    def _get_invoice_filename(self):
+        invoice_number = self.name.replace('/','_')
+        customer_lastname = (', ' +  self.partner_id.lastname) if self.partner_id.lastname else ''
+        order_description = (', ' +  self.invoice_line_ids[0].sale_line_ids.order_id.custom_description) if self.invoice_line_ids and self.invoice_line_ids[0].sale_line_ids.order_id.custom_description else ''
+
+        if self.state == 'cancel':
+            filename = f"Storno-{invoice_number}{customer_lastname}{order_description}"
+        else:
+            filename = f"{invoice_number}{customer_lastname}{order_description}"
+        return filename
+
+    def _get_invoice_report_filename(self):
+        return self._get_invoice_filename()
 
 
 class AccountMoveLine(models.Model):

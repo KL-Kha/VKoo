@@ -11,7 +11,7 @@
         'data/data.xml',
         'security/ir.model.access.csv',
         'views/account_move.xml',
-        'view/account_report',
+        'views/account_report.xml',
         'views/pretext.xml',
         'report/invoice_report.xml',
     ],

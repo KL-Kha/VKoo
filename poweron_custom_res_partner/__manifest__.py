@@ -3,9 +3,8 @@
     'version': '1.0',
     'author': "VKoo",
     'company': "PowerOn | Wapsol GmbH",
-    'depends': ['base','account'],
+    'depends': ['base'],
     'data': [
-        'views/account_report.xml',
         'views/res_partner_inherit.xml',
     ],
 }
